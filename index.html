@@ -211,14 +211,14 @@
 
   <script>
     // Replace this with your actual Viber number (international format with +63)
-    const myViberNumber = "+639XXXXXXXXX";   // ←←← CHANGE THIS TO YOUR REAL NUMBER
+    const myViberNumber = "+639673779498";   // ←←← CHANGE THIS TO YOUR REAL NUMBER
 
     const modal = document.getElementById('viber-modal');
     const qrcodeContainer = document.getElementById('qrcode');
     const numberLink = document.getElementById('viber-number');
 
     // Viber deep link (works on mobile)
-    const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+639673779498', '')}`;
+    const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+', '')}`;
 
     function openViberModal() {
       modal.style.display = 'flex';
