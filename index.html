@@ -24,11 +24,30 @@
     }
     
     .name {
-      font-size: 4rem;
+      font-size: 5.5rem;           /* Smaller as you requested */
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1;
       text-align: center;
+    }
+
+    /* Projects page styling - matching your image */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .portfolio-img {
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .portfolio-img:hover {
+      transform: scale(1.04);
     }
   </style>
 </head>
@@ -45,13 +64,13 @@
     </div>
   </nav>
 
-  <!-- Hero - Name Only -->
-<section class="hero">
-  <div class="text-center">
-    <p class="text-gray-400 text-sm tracking-[4px] mb-6">I AM</p>
-    <h1 class="name text-white">MICHAELA M. AMADOR</h1>
-    <p class="mt-8 text-xl text-gray-400 tracking-wide">COMPUTER ENGINEER</p>
-  </div>
+  <!-- Hero - Name Only (First Page) -->
+  <section class="hero">
+    <div class="text-center">
+      <p class="text-gray-400 text-sm tracking-[4px] mb-6">I AM</p>
+      <h1 class="name text-white">MICHAELA M. AMADOR</h1>
+      <p class="mt-8 text-xl text-gray-400 tracking-wide">COMPUTER ENGINEER</p>
+    </div>
 
     <!-- Social Icons -->
     <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-500">
@@ -72,44 +91,49 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-32 bg-zinc-950">
-    <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-5xl font-bold text-center mb-16">Selected Projects</h2>
+  <!-- SECOND PAGE - Projects (Styled like your image) -->
+  <section id="projects" class="min-h-screen bg-black py-20">
+    <div class="max-w-7xl mx-auto px-8">
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <div class="group">
-          <div class="aspect-video bg-zinc-900 rounded-2xl overflow-hidden mb-6">
-            <img src="https://picsum.photos/id/1015/800/450" alt="Project" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-xl">Network Infrastructure</h3>
-          <p class="text-gray-400 mt-2 text-sm">Scalable and secure LAN design with performance optimization.</p>
+      <!-- Three Image Grid -->
+      <div class="portfolio-grid mb-16">
+        <!-- Image 1 -->
+        <div class="overflow-hidden rounded-xl">
+          <img src="https://picsum.photos/id/1015/800/1000" alt="Project 1" 
+               class="portfolio-img w-full h-full"/>
         </div>
-        
-        <div class="group">
-          <div class="aspect-video bg-zinc-900 rounded-2xl overflow-hidden mb-6">
-            <img src="https://picsum.photos/id/201/800/450" alt="Project" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-xl">Embedded Systems</h3>
-          <p class="text-gray-400 mt-2 text-sm">Microcontroller-based automation solutions.</p>
+        <!-- Image 2 -->
+        <div class="overflow-hidden rounded-xl">
+          <img src="https://picsum.photos/id/201/800/1000" alt="Project 2" 
+               class="portfolio-img w-full h-full"/>
         </div>
-        
-        <div class="group">
-          <div class="aspect-video bg-zinc-900 rounded-2xl overflow-hidden mb-6">
-            <img src="https://picsum.photos/id/1016/800/450" alt="Project" 
-                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-xl">Electronics Design</h3>
-          <p class="text-gray-400 mt-2 text-sm">Circuit design and hardware integration.</p>
+        <!-- Image 3 -->
+        <div class="overflow-hidden rounded-xl">
+          <img src="https://picsum.photos/id/1016/800/1000" alt="Project 3" 
+               class="portfolio-img w-full h-full"/>
         </div>
+      </div>
+
+      <!-- Title in the middle -->
+      <div class="text-center">
+        <h1 class="text-7xl font-bold tracking-wider text-white mb-4">MY PORTFOLIO</h1>
+        <p class="text-gray-400 text-lg">
+          HELLO, I AM MICHAELA M. AMADOR — COMPUTER ENGINEER
+        </p>
+      </div>
+
+      <!-- View Projects Button -->
+      <div class="flex justify-center mt-12">
+        <a href="#" 
+           class="px-12 py-5 bg-white text-black text-sm uppercase tracking-widest font-medium hover:bg-gray-200 transition">
+          VIEW PROJECTS
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-32 bg-black">
+  <section id="contact" class="py-32 bg-zinc-950">
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-5xl font-bold mb-8">Get In Touch</h2>
       <p class="text-gray-400 mb-12 max-w-md mx-auto">
