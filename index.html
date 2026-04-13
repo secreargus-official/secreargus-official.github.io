@@ -1,298 +1,204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michaela - Portfolio</title>
-    <style>
-        :root {
-            --primary: #0066ff;
-            --text: #333;
-            --bg: #ffffff;
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --text: #eee;
-                --bg: #121212;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: var(--bg);
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px 40px;
-            background: linear-gradient(135deg, #0066ff, #00ccff);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 40px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-size: 1.4rem;
-            opacity: 0.95;
-        }
-
-        nav {
-            text-align: center;
-            margin: 30px 0;
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        section {
-            max-width: 1000px;
-            margin: 0 auto 80px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-bottom: 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        h2:after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .about {
-            text-align: center;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .project-card {
-            background: var(--bg);
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-        }
-
-        .project-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        .project-info h3 {
-            margin-bottom: 10px;
-        }
-
-        .project-info p {
-            font-size: 0.95rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .tag {
-            background: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: #555;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .skill {
-            background: #f8f9fa;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .contact {
-            text-align: center;
-        }
-
-        .contact a {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 30px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name | Frontend Developer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <style>
+    .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
+    .section-bg { background: #1e2937; }
+    .hexagon {
+      clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
+      box-shadow: 0 0 50px rgba(34, 211, 238, 0.7);
+    }
+    .nav-link { transition: all 0.3s; }
+    .nav-link:hover { color: #22d3ee; }
+  </style>
 </head>
-<body>
+<body class="hero-bg text-white font-sans">
 
-    <header>
-        <h1>Michaela Amador</h1>
-        <p class="tagline">Computer Engineering</p>
-    </header>
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-md z-50 border-b border-gray-800">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
+      <div class="text-2xl font-bold">Portfolio<span class="text-cyan-400">.</span></div>
+      <div class="flex gap-8 text-sm">
+        <a href="#home" class="nav-link text-cyan-400">Home</a>
+        <a href="#about" class="nav-link hover:text-cyan-300">About</a>
+        <a href="#skills" class="nav-link hover:text-cyan-300">Skills</a>
+        <a href="#portfolio" class="nav-link hover:text-cyan-300">Portfolio</a>
+        <a href="#contact" class="nav-link hover:text-cyan-300">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-    </nav>
+  <!-- HERO / HOME -->
+  <section id="home" class="min-h-screen flex items-center pt-20">
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="text-lg text-gray-400">Hello, It's Me</p>
+        <h1 class="text-6xl lg:text-7xl font-bold mt-2">Your Full Name</h1>
+        <h2 class="text-5xl font-semibold text-cyan-400 mt-3">And I'm a Frontend Developer</h2>
+        
+        <p class="mt-6 text-gray-300 max-w-lg">
+          I'm a passionate frontend developer who loves creating beautiful, responsive, and user-friendly websites. 
+          Let's build something amazing together.
+        </p>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about">
-            <p>A Computer Engineer student who has knowledge about Electronics,Microcontrollers, Programming and etc,.</p>
-            <p>You can also add your location, years of experience, or current goals.</p>
+        <div class="flex gap-4 mt-8">
+          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-github"></i></a>
         </div>
-    </section>
 
-    <section id="projects">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-            
-            <!-- Project 1 -->
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400/0066ff/ffffff?text=Project+1" alt="Project 1">
-                <div class="project-info">
-                    <h3>Project Title 1</h3>
-                    <p>Short description of the project. What you did, tools used, and the result.</p>
-                    <div class="tags">
-                        <span class="tag">Design</span>
-                        <span class="tag">Branding</span>
-                        <span class="tag">Figma</span>
-                    </div>
-                </div>
+        <a href="#" class="inline-block mt-10 px-8 py-4 bg-cyan-400 text-black font-semibold rounded-full hover:bg-cyan-300 transition text-lg">
+          Download CV
+        </a>
+      </div>
+
+      <!-- Hexagon Photo -->
+      <div class="flex justify-center">
+        <div class="relative w-80 h-80 lg:w-96 lg:h-96">
+          <div class="hexagon absolute inset-0 bg-cyan-400 p-3">
+            <img src="https://via.placeholder.com/800x900/111827/ffffff?text=Your+Professional+Photo" 
+                 alt="Your Name" 
+                 class="w-full h-full object-cover"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-bg py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img src="https://via.placeholder.com/600x700/1e2937/22d3ee?text=About+Photo" 
+               alt="About" class="rounded-2xl shadow-2xl"/>
+        </div>
+        <div class="space-y-6 text-gray-300">
+          <p>I'm a dedicated Frontend Developer with X years of experience building modern web applications. I specialize in React, Tailwind CSS, and creating seamless user experiences.</p>
+          <p>Currently based in [Your City], I enjoy turning complex problems into simple, beautiful designs. When I'm not coding, you'll find me exploring new technologies or contributing to open-source projects.</p>
+          
+          <div class="pt-6">
+            <h3 class="font-semibold text-cyan-400 mb-4">Quick Facts</h3>
+            <ul class="grid grid-cols-2 gap-3 text-sm">
+              <li><span class="text-cyan-400">→</span> Name: Your Full Name</li>
+              <li><span class="text-cyan-400">→</span> Age: XX</li>
+              <li><span class="text-cyan-400">→</span> Location: Makati City, Philippines</li>
+              <li><span class="text-cyan-400">→</span> Email: your@email.com</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-center mb-12">My Skills</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <!-- Replace with your actual skills -->
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+          <i class="fab fa-react text-5xl text-cyan-400 mb-4"></i>
+          <p class="font-semibold">React / Next.js</p>
+          <p class="text-sm text-gray-400">Advanced</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+          <i class="fab fa-html5 text-5xl text-orange-500 mb-4"></i>
+          <p class="font-semibold">HTML / CSS</p>
+          <p class="text-sm text-gray-400">Expert</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+          <i class="fab fa-tailwindcss text-5xl text-cyan-400 mb-4"></i>
+          <p class="font-semibold">Tailwind CSS</p>
+          <p class="text-sm text-gray-400">Expert</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+          <i class="fas fa-code text-5xl text-purple-400 mb-4"></i>
+          <p class="font-semibold">JavaScript / TypeScript</p>
+          <p class="text-sm text-gray-400">Advanced</p>
+        </div>
+        <!-- Add more skills as needed -->
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO / PROJECTS -->
+  <section id="portfolio" class="section-bg py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
+      <p class="text-center text-gray-400 mb-12">Here are some of my recent works</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project Card 1 -->
+        <div class="bg-gray-900 rounded-3xl overflow-hidden group">
+          <img src="https://via.placeholder.com/600x400/1e2937/22d3ee?text=Project+1" 
+               alt="Project" class="w-full h-56 object-cover group-hover:scale-105 transition"/>
+          <div class="p-6">
+            <h3 class="font-semibold text-xl">Project Title 1</h3>
+            <p class="text-gray-400 text-sm mt-2">Short description of the project and technologies used.</p>
+            <div class="flex gap-3 mt-4">
+              <a href="#" class="text-cyan-400 hover:underline">Live Demo →</a>
+              <a href="#" class="text-cyan-400 hover:underline">GitHub</a>
             </div>
-
-            <!-- Project 2 -->
-            <div class="project-card">
-                <img src="https://via.placeholder.com/600x400/00ccff/ffffff?text=Project+2" alt="Project 2">
-                <div class="project-info">
-                    <h3>Project Title 2</h3>
-                    <p>Short description of the project. What you did, tools used, and the result.</p>
-                    <div class="tags">
-                        <span class="tag">Web Development</span>
-                        <span class="tag">HTML/CSS</span>
-                        <span class="tag">JavaScript</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add more project cards here (copy-paste) -->
-
+          </div>
         </div>
-    </section>
+        
+        <!-- Duplicate the card above and change images/text for more projects -->
+        <!-- Add 2–5 more project cards here -->
+      </div>
+    </div>
+  </section>
 
-    <section id="skills">
-        <h2>Skills & Tools</h2>
-        <div class="skills">
-            <div class="skill">Adobe Photoshop</div>
-            <div class="skill">Figma</div>
-            <div class="skill">HTML & CSS</div>
-            <div class="skill">JavaScript</div>
-            <div class="skill">Photography</div>
-            <div class="skill">UI/UX Design</div>
-            <!-- Add or remove skills as needed -->
+  <!-- CONTACT -->
+  <section id="contact" class="py-24">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
+      <p class="text-gray-400 mb-10">I'm always open to discussing new opportunities and interesting projects.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-6 text-left">
+          <div>
+            <p class="text-cyan-400">Email</p>
+            <p>your.email@example.com</p>
+          </div>
+          <div>
+            <p class="text-cyan-400">Phone</p>
+            <p>+63 XXX XXX XXXX</p>
+          </div>
+          <div>
+            <p class="text-cyan-400">Location</p>
+            <p>Makati City, Philippines</p>
+          </div>
         </div>
-    </section>
 
-    <section id="contact" class="contact">
-        <h2>Get In Touch</h2>
-        <p>I'm always open to new opportunities and collaborations.</p>
-        <a href="mailto:your.email@example.com">Email Me</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-    </section>
+        <!-- Simple Contact Form -->
+        <form class="space-y-6">
+          <input type="text" placeholder="Your Name" 
+                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
+          <input type="email" placeholder="Your Email" 
+                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
+          <textarea placeholder="Your Message" rows="5"
+                    class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"></textarea>
+          <button type="submit"
+                  class="w-full bg-cyan-400 text-black font-semibold py-4 rounded-2xl hover:bg-cyan-300 transition">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <p>&copy; 2026 Your Full Name. All rights reserved.</p>
-        <p>Made with ❤️ and a simple HTML template</p>
-    </footer>
+  <!-- Footer -->
+  <footer class="bg-black py-8 text-center text-gray-500 text-sm">
+    © 2026 Your Name. Made with ❤️ and Tailwind CSS.
+  </footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
