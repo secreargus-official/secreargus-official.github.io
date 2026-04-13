@@ -67,7 +67,7 @@
         </a>
       </div>
 
-      <!-- Hexagon Photo - YOUR PHOTO HERE -->
+      <!-- Hexagon Photo - NEW PHOTO -->
       <div class="flex justify-center">
         <div class="relative w-80 h-80 lg:w-96 lg:h-96">
           <div class="hexagon absolute inset-0 bg-cyan-400 p-3">
@@ -86,7 +86,7 @@
         <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- About Photo - Same photo used here -->
+        <!-- About Photo - NEW PHOTO -->
         <div class="animate-on-scroll">
           <img src="https://raw.githubusercontent.com/secreargus-official/secreargus-official.github.io/main/photo.jpeg" 
                alt="About Me" class="rounded-2xl shadow-2xl w-full"/>
@@ -108,16 +108,99 @@
     </div>
   </section>
 
-  <!-- SKILLS, PORTFOLIO, CONTACT sections remain the same as before -->
-  <!-- (I kept them short here to save space - copy from your previous code if needed) -->
+  <!-- SKILLS -->
+  <section id="skills" class="py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold text-center mb-12">My Skills</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 stagger">
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 0;">
+          <i class="fas fa-network-wired text-5xl text-cyan-400 mb-4"></i>
+          <p class="font-semibold">Networking / IP Addressing</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 1;">
+          <i class="fas fa-microchip text-5xl text-orange-500 mb-4"></i>
+          <p class="font-semibold">Microcontrollers</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 2;">
+          <i class="fas fa-plug text-5xl text-cyan-400 mb-4"></i>
+          <p class="font-semibold">Electronics</p>
+        </div>
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 3;">
+          <i class="fas fa-code text-5xl text-purple-400 mb-4"></i>
+          <p class="font-semibold">Programming</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- For brevity, I'm showing only the changed parts above. Use the full code from my previous response and just replace the image parts with the two <img> tags shown above. -->
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section-bg py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
+        <p class="text-center text-gray-400 mb-12">Here are some of my recent works</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
+        <div class="bg-gray-900 rounded-3xl overflow-hidden group animate-on-scroll" style="--delay: 0;">
+          <img src="https://via.placeholder.com/600x400/1e2937/22d3ee?text=Project+1" 
+               alt="Project" class="w-full h-56 object-cover group-hover:scale-105 transition"/>
+          <div class="p-6">
+            <h3 class="font-semibold text-xl">Project Title 1</h3>
+            <p class="text-gray-400 text-sm mt-2">Short description of the project...</p>
+          </div>
+        </div>
+        <!-- Add more project cards here later -->
+      </div>
+    </div>
+  </section>
 
-  <!-- Footer & Script -->
+  <!-- CONTACT -->
+  <section id="contact" class="py-24">
+    <div class="max-w-4xl mx-auto px-8 text-center">
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
+        <p class="text-gray-400 mb-10">I'm always open to discussing new opportunities and projects.</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div class="space-y-8 text-left animate-on-scroll">
+          <div>
+            <p class="text-cyan-400 text-lg font-medium">Email</p>
+            <p class="text-xl">michaelaamador.company@gmail.com</p>
+          </div>
+          <div>
+            <p class="text-cyan-400 text-lg font-medium">Location</p>
+            <p class="text-xl">Mandaluyong City, Philippines</p>
+          </div>
+          <div class="pt-6">
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=michaelaamador.company@gmail.com" 
+               target="_blank"
+               class="inline-block px-10 py-4 bg-cyan-400 text-black font-semibold rounded-full hover:bg-cyan-300 transition text-lg">
+              Message Me on Gmail
+            </a>
+          </div>
+        </div>
+
+        <form class="space-y-6 animate-on-scroll" action="https://formsubmit.co/michaelaamador.company@gmail.com" method="POST">
+          <input type="text" name="name" placeholder="Your Name" class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
+          <input type="email" name="email" placeholder="Your Email" class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
+          <textarea name="message" placeholder="Your Message" rows="5" class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"></textarea>
+          <button type="submit" class="w-full bg-cyan-400 text-black font-semibold py-4 rounded-2xl hover:bg-cyan-300 transition">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer class="bg-black py-8 text-center text-gray-500 text-sm">
     © 2026 Secre Argus Official
   </footer>
 
+  <!-- Scroll Animation Script -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
