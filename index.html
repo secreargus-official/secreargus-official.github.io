@@ -24,30 +24,19 @@
     }
     
     .name {
-      font-size: 5.5rem;           /* Smaller as you requested */
+      font-size: 5.5rem;
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1;
       text-align: center;
     }
 
-    /* Projects page styling - matching your image */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-      max-width: 1100px;
-      margin: 0 auto;
+    /* Project Card Styling */
+    .project-card {
+      transition: transform 0.4s ease;
     }
-
-    .portfolio-img {
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    .portfolio-img:hover {
-      transform: scale(1.04);
+    .project-card:hover {
+      transform: translateY(-8px);
     }
   </style>
 </head>
@@ -64,7 +53,7 @@
     </div>
   </nav>
 
-  <!-- Hero - Name Only (First Page) -->
+  <!-- Hero - Name Only -->
   <section class="hero">
     <div class="text-center">
       <p class="text-gray-400 text-sm tracking-[4px] mb-6">I AM</p>
@@ -91,43 +80,42 @@
     </div>
   </section>
 
-  <!-- SECOND PAGE - Projects (Styled like your image) -->
-  <section id="projects" class="min-h-screen bg-black py-20">
-    <div class="max-w-7xl mx-auto px-8">
+  <!-- PROJECTS SECTION - Updated to match your screenshot -->
+  <section id="projects" class="py-28 bg-black">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-6xl font-bold text-center mb-16 text-white">Selected Projects</h2>
       
-      <!-- Three Image Grid -->
-      <div class="portfolio-grid mb-16">
-        <!-- Image 1 -->
-        <div class="overflow-hidden rounded-xl">
-          <img src="https://picsum.photos/id/1015/800/1000" alt="Project 1" 
-               class="portfolio-img w-full h-full"/>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Project 1 -->
+        <div class="project-card group">
+          <div class="overflow-hidden rounded-2xl mb-6">
+            <img src="https://picsum.photos/id/1015/800/500" alt="Network Infrastructure" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          </div>
+          <h3 class="font-semibold text-2xl mb-2">Network Infrastructure</h3>
+          <p class="text-gray-400 text-sm">Scalable and secure LAN design with performance optimization.</p>
         </div>
-        <!-- Image 2 -->
-        <div class="overflow-hidden rounded-xl">
-          <img src="https://picsum.photos/id/201/800/1000" alt="Project 2" 
-               class="portfolio-img w-full h-full"/>
-        </div>
-        <!-- Image 3 -->
-        <div class="overflow-hidden rounded-xl">
-          <img src="https://picsum.photos/id/1016/800/1000" alt="Project 3" 
-               class="portfolio-img w-full h-full"/>
-        </div>
-      </div>
 
-      <!-- Title in the middle -->
-      <div class="text-center">
-        <h1 class="text-7xl font-bold tracking-wider text-white mb-4">MY PORTFOLIO</h1>
-        <p class="text-gray-400 text-lg">
-          HELLO, I AM MICHAELA M. AMADOR — COMPUTER ENGINEER
-        </p>
-      </div>
+        <!-- Project 2 -->
+        <div class="project-card group">
+          <div class="overflow-hidden rounded-2xl mb-6">
+            <img src="https://picsum.photos/id/201/800/500" alt="Embedded Systems" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          </div>
+          <h3 class="font-semibold text-2xl mb-2">Embedded Systems</h3>
+          <p class="text-gray-400 text-sm">Microcontroller-based automation solutions.</p>
+        </div>
 
-      <!-- View Projects Button -->
-      <div class="flex justify-center mt-12">
-        <a href="#" 
-           class="px-12 py-5 bg-white text-black text-sm uppercase tracking-widest font-medium hover:bg-gray-200 transition">
-          VIEW PROJECTS
-        </a>
+        <!-- Project 3 -->
+        <div class="project-card group">
+          <div class="overflow-hidden rounded-2xl mb-6">
+            <img src="https://picsum.photos/id/1016/800/500" alt="Electronics Design" 
+                 class="w-full h-full object-cover group-hover:scale-105 transition duration-700"/>
+          </div>
+          <h3 class="font-semibold text-2xl mb-2">Electronics Design</h3>
+          <p class="text-gray-400 text-sm">Circuit design and hardware integration.</p>
+        </div>
       </div>
     </div>
   </section>
