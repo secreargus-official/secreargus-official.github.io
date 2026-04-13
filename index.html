@@ -3,107 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Secre Argus | CompEng</title>
+  <title>Secre Argus | Computer Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
   <style>
-    .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
-    .section-bg { background: #1e2937; }
-    .hexagon {
-      clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
-      box-shadow: 0 0 50px rgba(34, 211, 238, 0.7);
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
     }
+
+    .hero-bg {
+      background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08) 0%, transparent 70%),
+                  linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 10%, transparent 60%);
+      animation: slow-glow 25s infinite linear;
+      opacity: 0.6;
+    }
+
+    @keyframes slow-glow {
+      0% { transform: rotate(0deg) translate(10px, 10px); }
+      100% { transform: rotate(360deg) translate(20px, -20px); }
+    }
+
+    .glow-beam {
+      position: absolute;
+      width: 4px;
+      height: 300px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.6), transparent);
+      opacity: 0.3;
+      animation: beam-move 18s linear infinite;
+    }
+
+    .glow-orb {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 40px 15px rgba(255,255,255,0.7);
+      animation: orb-float 25s ease-in-out infinite;
+    }
+
+    @keyframes beam-move {
+      0% { transform: translateY(-100px) rotate(15deg); }
+      100% { transform: translateY(800px) rotate(15deg); }
+    }
+
+    @keyframes orb-float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(80px, -60px); }
+    }
+
+    .section-bg { background: #0f0f0f; }
+    
+    .card-glow {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-glow:hover {
+      box-shadow: 0 0 60px -10px rgba(255,255,255,0.25);
+      transform: translateY(-4px);
+    }
+
     .animate-on-scroll {
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+      transform: translateY(50px);
+      transition: all 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
+    
     .animate-on-scroll.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .stagger > * {
-      transition-delay: calc(var(--delay) * 100ms);
-    }
   </style>
 </head>
-<body class="hero-bg text-white font-sans">
+<body class="bg-black text-white font-sans overflow-x-hidden">
 
   <!-- Navigation -->
-  <nav class="fixed top-0 w-full bg-black/80 backdrop-blur-md z-50 border-b border-gray-800">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-5">
-      <div class="text-2xl font-bold">Portfolio<span class="text-cyan-400">.</span></div>
-      <div class="flex gap-8 text-sm">
-        <a href="#home" class="nav-link text-cyan-400">Home</a>
-        <a href="#about" class="nav-link hover:text-cyan-300">About</a>
-        <a href="#skills" class="nav-link hover:text-cyan-300">Skills</a>
-        <a href="#portfolio" class="nav-link hover:text-cyan-300">Portfolio</a>
-        <a href="#contact" class="nav-link hover:text-cyan-300">Contact</a>
+  <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-lg z-50 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex justify-between items-center px-8 py-6">
+      <div class="text-2xl font-semibold tracking-tight">Secre Argus<span class="text-white/60">.</span></div>
+      <div class="flex gap-10 text-sm font-medium">
+        <a href="#home" class="hover:text-white/80 transition">Home</a>
+        <a href="#about" class="hover:text-white/80 transition">About</a>
+        <a href="#skills" class="hover:text-white/80 transition">Skills</a>
+        <a href="#portfolio" class="hover:text-white/80 transition">Projects</a>
+        <a href="#contact" class="hover:text-white/80 transition">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="home" class="min-h-screen flex items-center pt-20">
-    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <p class="text-lg text-gray-400">Hello, It's Me</p>
-        <h1 class="text-5xl lg:text-6xl font-bold mt-2">Secre Argus / Micha</h1>
-        <h2 class="text-5xl font-semibold text-cyan-400 mt-3">System Engineer & Network Engineer</h2>
+  <!-- HERO with moving lights -->
+  <section id="home" class="hero-bg min-h-screen flex items-center pt-20 relative">
+    <!-- Moving light beams -->
+    <div class="glow-beam" style="top: 20%; left: 15%; animation-delay: 0s;"></div>
+    <div class="glow-beam" style="top: 40%; left: 65%; animation-delay: -6s; transform: rotate(25deg);"></div>
+    <div class="glow-beam" style="top: 60%; left: 35%; animation-delay: -12s; transform: rotate(-10deg);"></div>
+    
+    <!-- Floating glow orbs -->
+    <div class="glow-orb" style="top: 25%; left: 20%; animation-delay: 2s;"></div>
+    <div class="glow-orb" style="top: 55%; left: 75%; animation-delay: -8s; width: 8px; height: 8px;"></div>
+
+    <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div class="space-y-6">
+        <p class="text-lg text-white/60 tracking-wide">HELLO, IT'S ME</p>
+        <h1 class="text-6xl lg:text-7xl font-bold tracking-tighter leading-none">Secre Argus</h1>
+        <h2 class="text-5xl font-medium text-white/90">Computer Engineer</h2>
         
-        <p class="mt-6 text-gray-300 max-w-lg">
-          Passionate about networking, systems engineering, microcontrollers, electronics, and building reliable solutions.
+        <p class="max-w-lg text-white/70 text-lg">
+          Building reliable systems, networks, and intelligent solutions with passion for electronics, microcontrollers, and clean engineering.
         </p>
 
-        <div class="flex gap-4 mt-8">
-          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="w-11 h-11 flex items-center justify-center border-2 border-cyan-400 rounded-full hover:bg-cyan-400 hover:text-black transition"><i class="fab fa-github"></i></a>
+        <div class="flex gap-5 pt-4">
+          <a href="#" class="w-11 h-11 flex items-center justify-center border border-white/30 rounded-full hover:border-white/70 transition"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="w-11 h-11 flex items-center justify-center border border-white/30 rounded-full hover:border-white/70 transition"><i class="fab fa-github"></i></a>
+          <a href="#" class="w-11 h-11 flex items-center justify-center border border-white/30 rounded-full hover:border-white/70 transition"><i class="fab fa-twitter"></i></a>
         </div>
 
-        <a href="#" class="inline-block mt-10 px-8 py-4 bg-cyan-400 text-black font-semibold rounded-full hover:bg-cyan-300 transition text-lg">
+        <a href="#" class="inline-block mt-8 px-10 py-5 border border-white/80 text-white font-medium rounded-full hover:bg-white hover:text-black transition text-lg">
           Download CV
         </a>
       </div>
 
-      <!-- Hexagon Photo -->
-      <div class="flex justify-center">
-        <div class="relative w-80 h-80 lg:w-96 lg:h-96">
-          <div class="hexagon absolute inset-0 bg-cyan-400 p-3">
-            <!-- REPLACE THIS WITH YOUR PHOTO -->
+      <!-- Profile Image with subtle glow -->
+      <div class="flex justify-center lg:justify-end">
+        <div class="relative w-80 h-80 lg:w-[420px] lg:h-[420px]">
+          <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-3xl"></div>
+          <div class="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
             <img src="https://raw.githubusercontent.com/secreargus-official/secreargus-official.github.io/main/85a586d5-93a5-4c13-9a79-3ccd1b293b84-removebg-preview%20(1).jpg" 
                  alt="Secre Argus" class="w-full h-full object-cover"/>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/40 text-sm flex flex-col items-center">
+      <div>Scroll to explore</div>
+      <div class="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
+    </div>
   </section>
 
   <!-- ABOUT -->
-  <section id="about" class="section-bg py-24">
+  <section id="about" class="section-bg py-28">
     <div class="max-w-6xl mx-auto px-8">
-      <div class="animate-on-scroll">
-        <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <!-- About Photo -->
-        <div class="animate-on-scroll">
-          <!-- REPLACE THIS WITH YOUR PHOTO -->
+      <h2 class="text-5xl font-bold text-center mb-16">About Me</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="rounded-3xl overflow-hidden border border-white/10">
           <img src="https://raw.githubusercontent.com/secreargus-official/secreargus-official.github.io/main/85a586d5-93a5-4c13-9a79-3ccd1b293b84-removebg-preview%20(1).jpg" 
-               alt="About Me" class="rounded-2xl shadow-2xl w-full"/>
+               alt="About Me" class="w-full"/>
         </div>
-        <div class="space-y-6 text-gray-300 animate-on-scroll">
-          <p>I'm a dedicated System & Network Engineer with months of hands-on experience in networking, IP addressing, microcontrollers, and electronics.</p>
-          <p>Currently based in Mandaluyong City, Philippines. I enjoy solving technical challenges and building efficient systems.</p>
+        
+        <div class="space-y-8 text-white/80">
+          <p class="text-lg">I'm a dedicated Computer Engineer with hands-on expertise in networking, systems design, microcontrollers, and electronics.</p>
+          <p>Based in the Philippines, I focus on creating robust, efficient technical solutions that solve real-world problems.</p>
           
-          <div class="pt-6">
-            <h3 class="font-semibold text-cyan-400 mb-4">Quick Facts</h3>
-            <ul class="grid grid-cols-2 gap-3 text-sm">
-              <li><span class="text-cyan-400">→</span> Name: Michaela Mariano Amador</li>
-              <li><span class="text-cyan-400">→</span> Location: Mandaluyong City, Philippines</li>
-              <li><span class="text-cyan-400">→</span> Email: michaelaamador.company@gmail.com</li>
-            </ul>
+          <div class="pt-8 border-t border-white/10">
+            <h3 class="text-white font-medium mb-6">Quick Facts</h3>
+            <div class="grid grid-cols-1 gap-4 text-sm">
+              <div class="flex gap-4"><span class="text-white/50 w-20">Name</span> Michaela Mariano Amador</div>
+              <div class="flex gap-4"><span class="text-white/50 w-20">Location</span> Mandaluyong City, Philippines</div>
+              <div class="flex gap-4"><span class="text-white/50 w-20">Email</span> michaelaamador.company@gmail.com</div>
+            </div>
           </div>
         </div>
       </div>
@@ -111,104 +184,88 @@
   </section>
 
   <!-- SKILLS -->
-  <section id="skills" class="py-24">
+  <section id="skills" class="py-28 bg-black">
     <div class="max-w-6xl mx-auto px-8">
-      <div class="animate-on-scroll">
-        <h2 class="text-4xl font-bold text-center mb-12">My Skills</h2>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 stagger">
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 0;">
-          <i class="fas fa-network-wired text-5xl text-cyan-400 mb-4"></i>
-          <p class="font-semibold">Networking / IP Addressing</p>
+      <h2 class="text-5xl font-bold text-center mb-16">Technical Skills</h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div class="card-glow bg-zinc-950 border border-white/10 p-8 rounded-3xl text-center">
+          <i class="fas fa-network-wired text-5xl mb-6 text-white"></i>
+          <p class="font-medium">Networking & IP Addressing</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 1;">
-          <i class="fas fa-microchip text-5xl text-orange-500 mb-4"></i>
-          <p class="font-semibold">Microcontrollers</p>
+        <div class="card-glow bg-zinc-950 border border-white/10 p-8 rounded-3xl text-center">
+          <i class="fas fa-microchip text-5xl mb-6 text-white"></i>
+          <p class="font-medium">Microcontrollers & Embedded Systems</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 2;">
-          <i class="fas fa-plug text-5xl text-cyan-400 mb-4"></i>
-          <p class="font-semibold">Electronics</p>
+        <div class="card-glow bg-zinc-950 border border-white/10 p-8 rounded-3xl text-center">
+          <i class="fas fa-plug text-5xl mb-6 text-white"></i>
+          <p class="font-medium">Electronics & Circuit Design</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 3;">
-          <i class="fas fa-code text-5xl text-purple-400 mb-4"></i>
-          <p class="font-semibold">Programming</p>
+        <div class="card-glow bg-zinc-950 border border-white/10 p-8 rounded-3xl text-center">
+          <i class="fas fa-code text-5xl mb-6 text-white"></i>
+          <p class="font-medium">Programming & Systems</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PORTFOLIO -->
-  <section id="portfolio" class="section-bg py-24">
+  <section id="portfolio" class="section-bg py-28">
     <div class="max-w-6xl mx-auto px-8">
-      <div class="animate-on-scroll">
-        <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
-        <p class="text-center text-gray-400 mb-12">Here are some of my recent works</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
-        <div class="bg-gray-900 rounded-3xl overflow-hidden group animate-on-scroll" style="--delay: 0;">
-          <img src="https://via.placeholder.com/600x400/1e2937/22d3ee?text=Project+1" 
-               alt="Project" class="w-full h-56 object-cover group-hover:scale-105 transition"/>
-          <div class="p-6">
-            <h3 class="font-semibold text-xl">Project Title 1</h3>
-            <p class="text-gray-400 text-sm mt-2">Short description of the project...</p>
+      <h2 class="text-5xl font-bold text-center mb-4">Featured Projects</h2>
+      <p class="text-center text-white/50 mb-16">Recent engineering works and solutions</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Add your project cards here – they already have glow on hover -->
+        <div class="card-glow bg-zinc-950 border border-white/10 rounded-3xl overflow-hidden group">
+          <div class="h-64 bg-zinc-900 flex items-center justify-center">
+            <!-- Replace with real project image -->
+            <span class="text-white/30">Project Preview</span>
+          </div>
+          <div class="p-8">
+            <h3 class="font-semibold text-xl">Project Title</h3>
+            <p class="text-white/60 mt-3 text-sm">Short technical description...</p>
           </div>
         </div>
-        <!-- Add more project cards here -->
+        <!-- Duplicate and customize more cards -->
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-24">
+  <section id="contact" class="py-28 bg-black">
     <div class="max-w-4xl mx-auto px-8 text-center">
-      <div class="animate-on-scroll">
-        <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-        <p class="text-gray-400 mb-10">I'm always open to discussing new opportunities and projects.</p>
-      </div>
+      <h2 class="text-5xl font-bold mb-8">Let's Connect</h2>
+      <p class="text-white/60 mb-16 max-w-md mx-auto">Open to collaborations, projects, or just a technical conversation.</p>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Contact Info -->
-        <div class="space-y-8 text-left animate-on-scroll">
+        <div class="text-left space-y-10">
           <div>
-            <p class="text-cyan-400 text-lg font-medium">Email</p>
-            <p class="text-xl">michaelaamador.company@gmail.com</p>
+            <div class="text-white/50 text-sm">EMAIL</div>
+            <div class="text-xl mt-1">michaelaamador.company@gmail.com</div>
           </div>
           <div>
-            <p class="text-cyan-400 text-lg font-medium">Location</p>
-            <p class="text-xl">Mandaluyong City, Philippines</p>
-          </div>
-          <div class="pt-6">
-            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=michaelaamador.company@gmail.com&su=Inquiry%20from%20Portfolio&body=Hi%20Michaela%2C%0A%0AI%20would%20like%20to%20discuss..." 
-               target="_blank"
-               class="inline-block px-10 py-4 bg-cyan-400 text-black font-semibold rounded-full hover:bg-cyan-300 transition text-lg">
-              Message Me on Gmail
-            </a>
+            <div class="text-white/50 text-sm">LOCATION</div>
+            <div class="text-xl mt-1">Mandaluyong City, Philippines</div>
           </div>
         </div>
-
-        <!-- Optional Simple Form (backup) -->
-        <form class="space-y-6 animate-on-scroll" action="https://formsubmit.co/michaelaamador.company@gmail.com" method="POST">
-          <input type="text" name="name" placeholder="Your Name" 
-                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
-          <input type="email" name="email" placeholder="Your Email" 
-                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
-          <textarea name="message" placeholder="Your Message" rows="5"
-                    class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"></textarea>
-          <button type="submit"
-                  class="w-full bg-cyan-400 text-black font-semibold py-4 rounded-2xl hover:bg-cyan-300 transition">
-            Send Message
-          </button>
+        
+        <form action="https://formsubmit.co/michaelaamador.company@gmail.com" method="POST" class="space-y-6">
+          <input type="text" name="name" placeholder="Your Name" class="w-full bg-zinc-950 border border-white/10 rounded-2xl px-7 py-5 focus:outline-none focus:border-white/40"/>
+          <input type="email" name="email" placeholder="Your Email" class="w-full bg-zinc-950 border border-white/10 rounded-2xl px-7 py-5 focus:outline-none focus:border-white/40"/>
+          <textarea name="message" rows="5" placeholder="Your Message" class="w-full bg-zinc-950 border border-white/10 rounded-2xl px-7 py-5 focus:outline-none focus:border-white/40"></textarea>
+          <button type="submit" class="w-full py-5 bg-white text-black font-medium rounded-2xl hover:bg-white/90 transition">Send Message</button>
         </form>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black py-8 text-center text-gray-500 text-sm">
-    © 2026 Secre Argus Official
+  <footer class="bg-black py-12 text-center text-white/40 text-sm border-t border-white/10">
+    © 2026 Secre Argus • Computer Engineer
   </footer>
 
-  <!-- Scroll Animation Script -->
+  <!-- Scroll Animation Script (your original) -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -216,11 +273,9 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.animate-on-scroll').forEach(el => {
-      observer.observe(el);
-    });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
