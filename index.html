@@ -6,6 +6,9 @@
   <title>Secre Argus | Computer Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <!-- QR Code Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
    
@@ -38,6 +41,31 @@
     .project-card:hover {
       transform: translateY(-8px);
     }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 16px;
+      max-width: 380px;
+      width: 90%;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+    }
   </style>
 </head>
 <body class="bg-black text-white">
@@ -63,24 +91,20 @@
 
     <!-- Social Icons -->
     <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-500">
-      <!-- LinkedIn -->
       <a href="https://www.linkedin.com/in/michaela-amador-43bb00374" 
          target="_blank" 
          class="hover:text-white transition text-2xl">
         <i class="fab fa-linkedin-in"></i>
       </a>
       
-      <!-- GitHub -->
       <a href="https://github.com/secreargus-official" 
          target="_blank" 
          class="hover:text-white transition text-2xl">
         <i class="fab fa-github"></i>
       </a>
       
-      <!-- Viber (Replaced Twitter) -->
-      <a href="#09673779498" 
-         id="viber-link"
-         target="_blank" 
+      <!-- Viber Icon - Opens Modal -->
+      <a href="#" id="viber-btn"
          class="hover:text-white transition text-2xl">
         <i class="fab fa-viber"></i>
       </a>
@@ -97,6 +121,34 @@
       <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
     </div>
   </section>
+
+  <!-- Viber Modal -->
+  <div id="viber-modal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeViberModal()" 
+              class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
+        ×
+      </button>
+      
+      <div class="mb-6">
+        <i class="fab fa-viber text-[#7C3AED] text-5xl"></i>
+      </div>
+      
+      <h3 class="text-2xl font-semibold mb-2">Connect on Viber</h3>
+      <p class="text-gray-400 mb-8">Scan the QR code or click the number to chat with me</p>
+      
+      <!-- QR Code Container -->
+      <div id="qrcode" class="mx-auto mb-6 bg-white p-4 rounded-xl inline-block"></div>
+      
+      <!-- Phone Number -->
+      <a id="viber-number" href="#" 
+         class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8">
+        <!-- Your number will appear here -->
+      </a>
+      
+      <p class="text-xs text-gray-500">Open Viber on your phone and scan the code</p>
+    </div>
+  </div>
 
   <!-- Selected Projects -->
   <section id="projects" class="min-h-screen bg-black py-24">
@@ -156,6 +208,56 @@
   <footer class="bg-black py-12 text-center text-gray-500 text-sm border-t border-white/10">
     © 2026 Secre Argus • Computer Engineer • Mandaluyong City, Philippines
   </footer>
+
+  <script>
+    // Replace this with your actual Viber number (international format with +63)
+    const myViberNumber = "+639XXXXXXXXX";   // ←←← CHANGE THIS TO YOUR REAL NUMBER
+
+    const modal = document.getElementById('viber-modal');
+    const qrcodeContainer = document.getElementById('qrcode');
+    const numberLink = document.getElementById('viber-number');
+
+    // Viber deep link (works on mobile)
+    const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+639673779498', '')}`;
+
+    function openViberModal() {
+      modal.style.display = 'flex';
+      
+      // Clear previous QR if any
+      qrcodeContainer.innerHTML = '';
+      
+      // Generate QR Code with Viber deep link
+      new QRCode(qrcodeContainer, {
+        text: viberDeepLink,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      // Set clickable phone number
+      numberLink.textContent = myViberNumber;
+      numberLink.href = `viber://chat?number=${myViberNumber.replace('+', '')}`;
+    }
+
+    function closeViberModal() {
+      modal.style.display = 'none';
+    }
+
+    // Event listeners
+    document.getElementById('viber-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      openViberModal();
+    });
+
+    // Close modal when clicking outside the content
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeViberModal();
+      }
+    });
+  </script>
 
 </body>
 </html>
