@@ -3,18 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Amador | Computer Engineer</title>
+  <title>Your Name | Frontend Developer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
   <style>
     .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%); }
     .section-bg { background: #1e2937; }
+
+    /* Hexagon styling */
     .hexagon {
       clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
       box-shadow: 0 0 50px rgba(34, 211, 238, 0.7);
     }
-    .nav-link { transition: all 0.3s; }
-    .nav-link:hover { color: #22d3ee; }
+
+    /* Scroll Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger children (for skills & projects) */
+    .stagger > * {
+      transition-delay: calc(var(--delay) * 100ms);
+    }
   </style>
 </head>
 <body class="hero-bg text-white font-sans">
@@ -33,13 +49,13 @@
     </div>
   </nav>
 
-  <!-- HERO / HOME -->
+  <!-- HERO -->
   <section id="home" class="min-h-screen flex items-center pt-20">
     <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
         <p class="text-lg text-gray-400">Hello, It's Me</p>
-        <h1 class="text-6xl lg:text-7xl font-bold mt-2">Michaela Mariano Amador</h1>
-        <h2 class="text-5xl font-semibold text-cyan-400 mt-3"> I'm a System Engineer & Network Engineer</h2>
+        <h1 class="text-6xl lg:text-7xl font-bold mt-2">Your Full Name</h1>
+        <h2 class="text-5xl font-semibold text-cyan-400 mt-3">And I'm a Frontend Developer</h2>
         
         <p class="mt-6 text-gray-300 max-w-lg">
           I'm a passionate frontend developer who loves creating beautiful, responsive, and user-friendly websites. 
@@ -58,13 +74,11 @@
         </a>
       </div>
 
-      <!-- Hexagon Photo -->
       <div class="flex justify-center">
         <div class="relative w-80 h-80 lg:w-96 lg:h-96">
           <div class="hexagon absolute inset-0 bg-cyan-400 p-3">
             <img src="https://via.placeholder.com/800x900/111827/ffffff?text=Your+Professional+Photo" 
-                 alt="Your Name" 
-                 class="w-full h-full object-cover"/>
+                 alt="Your Name" class="w-full h-full object-cover"/>
           </div>
         </div>
       </div>
@@ -74,21 +88,22 @@
   <!-- ABOUT -->
   <section id="about" class="section-bg py-24">
     <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold text-center mb-12">About Me</h2>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
+        <div class="animate-on-scroll">
           <img src="https://via.placeholder.com/600x700/1e2937/22d3ee?text=About+Photo" 
-               alt="About" class="rounded-2xl shadow-2xl"/>
+               alt="About" class="rounded-2xl shadow-2xl w-full"/>
         </div>
-        <div class="space-y-6 text-gray-300">
-          <p>I'm a dedicated Frontend Developer with X years of experience building modern web applications. I specialize in React, Tailwind CSS, and creating seamless user experiences.</p>
-          <p>Currently based in [Your City], I enjoy turning complex problems into simple, beautiful designs. When I'm not coding, you'll find me exploring new technologies or contributing to open-source projects.</p>
+        <div class="space-y-6 text-gray-300 animate-on-scroll">
+          <p>I'm a dedicated Frontend Developer with X years of experience building modern web applications...</p>
+          <p>Currently based in Makati City, Philippines...</p>
           
           <div class="pt-6">
             <h3 class="font-semibold text-cyan-400 mb-4">Quick Facts</h3>
             <ul class="grid grid-cols-2 gap-3 text-sm">
               <li><span class="text-cyan-400">→</span> Name: Your Full Name</li>
-              <li><span class="text-cyan-400">→</span> Age: XX</li>
               <li><span class="text-cyan-400">→</span> Location: Makati City, Philippines</li>
               <li><span class="text-cyan-400">→</span> Email: your@email.com</li>
             </ul>
@@ -101,57 +116,50 @@
   <!-- SKILLS -->
   <section id="skills" class="py-24">
     <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-4xl font-bold text-center mb-12">My Skills</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <!-- Replace with your actual skills -->
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold text-center mb-12">My Skills</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 stagger">
+        <!-- Add more skill cards as needed -->
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 0;">
           <i class="fab fa-react text-5xl text-cyan-400 mb-4"></i>
           <p class="font-semibold">React / Next.js</p>
-          <p class="text-sm text-gray-400">Advanced</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 1;">
           <i class="fab fa-html5 text-5xl text-orange-500 mb-4"></i>
           <p class="font-semibold">HTML / CSS</p>
-          <p class="text-sm text-gray-400">Expert</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 2;">
           <i class="fab fa-tailwindcss text-5xl text-cyan-400 mb-4"></i>
           <p class="font-semibold">Tailwind CSS</p>
-          <p class="text-sm text-gray-400">Expert</p>
         </div>
-        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition">
+        <div class="bg-gray-900 p-6 rounded-2xl text-center hover:scale-105 transition animate-on-scroll" style="--delay: 3;">
           <i class="fas fa-code text-5xl text-purple-400 mb-4"></i>
           <p class="font-semibold">JavaScript / TypeScript</p>
-          <p class="text-sm text-gray-400">Advanced</p>
         </div>
-        <!-- Add more skills as needed -->
       </div>
     </div>
   </section>
 
-  <!-- PORTFOLIO / PROJECTS -->
+  <!-- PORTFOLIO -->
   <section id="portfolio" class="section-bg py-24">
     <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
-      <p class="text-center text-gray-400 mb-12">Here are some of my recent works</p>
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold text-center mb-4">Featured Projects</h2>
+        <p class="text-center text-gray-400 mb-12">Here are some of my recent works</p>
+      </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project Card 1 -->
-        <div class="bg-gray-900 rounded-3xl overflow-hidden group">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger">
+        <!-- Project cards -->
+        <div class="bg-gray-900 rounded-3xl overflow-hidden group animate-on-scroll" style="--delay: 0;">
           <img src="https://via.placeholder.com/600x400/1e2937/22d3ee?text=Project+1" 
                alt="Project" class="w-full h-56 object-cover group-hover:scale-105 transition"/>
           <div class="p-6">
             <h3 class="font-semibold text-xl">Project Title 1</h3>
-            <p class="text-gray-400 text-sm mt-2">Short description of the project and technologies used.</p>
-            <div class="flex gap-3 mt-4">
-              <a href="#" class="text-cyan-400 hover:underline">Live Demo →</a>
-              <a href="#" class="text-cyan-400 hover:underline">GitHub</a>
-            </div>
+            <p class="text-gray-400 text-sm mt-2">Short description...</p>
           </div>
         </div>
-        
-        <!-- Duplicate the card above and change images/text for more projects -->
-        <!-- Add 2–5 more project cards here -->
+        <!-- Add more project cards here with different --delay values -->
       </div>
     </div>
   </section>
@@ -159,35 +167,19 @@
   <!-- CONTACT -->
   <section id="contact" class="py-24">
     <div class="max-w-4xl mx-auto px-8 text-center">
-      <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
-      <p class="text-gray-400 mb-10">I'm always open to discussing new opportunities and interesting projects.</p>
+      <div class="animate-on-scroll">
+        <h2 class="text-4xl font-bold mb-6">Get In Touch</h2>
+        <p class="text-gray-400 mb-10">I'm always open to discussing new opportunities...</p>
+      </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="space-y-6 text-left">
-          <div>
-            <p class="text-cyan-400">Email</p>
-            <p>your.email@example.com</p>
-          </div>
-          <div>
-            <p class="text-cyan-400">Phone</p>
-            <p>+63 XXX XXX XXXX</p>
-          </div>
-          <div>
-            <p class="text-cyan-400">Location</p>
-            <p>Makati City, Philippines</p>
-          </div>
+        <div class="space-y-6 text-left animate-on-scroll">
+          <!-- contact info -->
         </div>
 
-        <!-- Simple Contact Form -->
-        <form class="space-y-6">
-          <input type="text" placeholder="Your Name" 
-                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
-          <input type="email" placeholder="Your Email" 
-                 class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"/>
-          <textarea placeholder="Your Message" rows="5"
-                    class="w-full bg-gray-900 border border-gray-700 rounded-2xl px-6 py-4 focus:outline-none focus:border-cyan-400"></textarea>
-          <button type="submit"
-                  class="w-full bg-cyan-400 text-black font-semibold py-4 rounded-2xl hover:bg-cyan-300 transition">
+        <form class="space-y-6 animate-on-scroll">
+          <!-- form fields -->
+          <button type="submit" class="w-full bg-cyan-400 text-black font-semibold py-4 rounded-2xl hover:bg-cyan-300 transition">
             Send Message
           </button>
         </form>
@@ -197,8 +189,28 @@
 
   <!-- Footer -->
   <footer class="bg-black py-8 text-center text-gray-500 text-sm">
-    © 2026 Your Name. Made with ❤️ and Tailwind CSS.
+    © 2026 Your Name. Made with ❤️ 
   </footer>
 
+  <!-- Scroll Animation Script -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Optional: stop observing after animation
+          // observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,   // Trigger when 15% of element is visible
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    // Observe all elements with .animate-on-scroll
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
