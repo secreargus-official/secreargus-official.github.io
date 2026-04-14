@@ -43,19 +43,25 @@
 }
 
 /* Make the text sit on top of the photo */
-.hero > div {
+.hero {
+  height: 100vh;
   position: relative;
-  z-index: 2;
+  overflow: hidden;
 }
-   
-    .name {
-      font-size: 5.5rem;
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      text-align: center;
-      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);   /* extra shadow for clarity */
-    }
+
+.name {
+  font-size: 5.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 20;
+}
 
     .project-card {
       transition: all 0.4s ease;
@@ -103,47 +109,51 @@
       </div>
     </div>
   </nav>
+<!-- Hero Section -->
+<section class="hero">
+  <!-- Background Photo -->
+  <div class="absolute inset-0 bg-cover bg-center bg-fixed z-0"
+       style="background-image: url('hero-background.jpg'); filter: brightness(0.65) contrast(1.1);">
+  </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="text-center">
-      <p class="text-gray-400 text-sm tracking-[4px] mb-6">I AM</p>
-      <h1 class="name text-white">MICHAELA M. AMADOR</h1>
-      <p class="mt-8 text-xl text-gray-400 tracking-wide">COMPUTER ENGINEER</p>
-    </div>
+  <!-- Main Content (Centered) -->
+  <div class="hero-content relative z-20 text-center px-6">
+    <p class="text-gray-300 text-sm tracking-[4px] mb-6">I AM</p>
+    <h1 class="name text-white">MICHAELA M. AMADOR</h1>
+    <p class="mt-8 text-xl text-gray-300 tracking-wide">COMPUTER ENGINEER</p>
+  </div>
 
-    <!-- Social Icons - Lower LEFT side -->
-<div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-10">
-  <a href="https://www.linkedin.com/in/michaela-amador-43bb00374"
-     target="_blank"
-     class="hover:text-white transition text-2xl">
-    <i class="fab fa-linkedin-in"></i>
-  </a>
- 
-  <a href="https://github.com/secreargus-official"
-     target="_blank"
-     class="hover:text-white transition text-2xl">
-    <i class="fab fa-github"></i>
-  </a>
- 
-  <!-- Viber Icon -->
-  <a href="#" id="viber-btn"
-     class="hover:text-white transition text-2xl">
-    <i class="fab fa-viber"></i>
-  </a>
-</div>
+  <!-- Social Icons - FORCE to LOWER LEFT -->
+  <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-30">
+    <a href="https://www.linkedin.com/in/michaela-amador-43bb00374"
+       target="_blank"
+       class="hover:text-white transition text-3xl">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    
+    <a href="https://github.com/secreargus-official"
+       target="_blank"
+       class="hover:text-white transition text-3xl">
+      <i class="fab fa-github"></i>
+    </a>
+    
+    <a href="#" id="viber-btn"
+       class="hover:text-white transition text-3xl">
+      <i class="fab fa-viber"></i>
+    </a>
+  </div>
 
-    <!-- Vertical Year - Keep on RIGHT side -->
-<div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-10">
-  2026
-</div>
+  <!-- Vertical Year - Keep on RIGHT -->
+  <div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-30">
+    2026
+  </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gray-400 text-xs tracking-widest flex flex-col items-center">
-      SCROLL
-      <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
-    </div>
-  </section>
+  <!-- Scroll Indicator - Center Bottom -->
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gray-400 text-xs tracking-widest flex flex-col items-center z-30">
+    SCROLL
+    <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
+  </div>
+</section>
 
   <!-- Viber Modal -->
   <div id="viber-modal" class="modal">
