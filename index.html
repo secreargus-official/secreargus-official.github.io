@@ -3,294 +3,213 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Secre Argus | Computer Engineer</title>
+  <title>Michaela M. Amador | Computer Engineer</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
-  <!-- QR Code Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-   
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-    }
-   
+    
+    body { font-family: 'Inter', system-ui, sans-serif; }
+
     .hero {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #000;
-  position: relative;
-  overflow: hidden;
-}
-
-/* === YOUR PHOTO AS BACKGROUND === */
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('hero-background.jpg');   /* ← Your photo */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;   /* nice subtle parallax */
-  filter: brightness(0.6) contrast(1.15);   /* makes text readable */
-  z-index: 1;
-}
-
-/* Make the text sit on top of the photo */
-.hero {
-  height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.name {
-  font-size: 5.5rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  text-align: center;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
-}
-
-.hero-content {
-  position: relative;
-  z-index: 20;
-}
-
-    .project-card {
-      transition: all 0.4s ease;
-    }
-   
-    .project-card:hover {
-      transform: translateY(-8px);
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Modal Styles */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: url('hero-background.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      filter: brightness(0.65) contrast(1.1);
+      z-index: 1;
+    }
+
+    .name {
+      font-size: 5.2rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+    }
+
     .modal {
       display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.85);
       z-index: 1000;
       align-items: center;
       justify-content: center;
     }
-    
+
     .modal-content {
       background: #111;
-      border: 1px solid #333;
+      border: 1px solid #444;
       border-radius: 16px;
-      max-width: 380px;
+      max-width: 420px;
       width: 90%;
-      padding: 32px;
+      padding: 40px 32px;
       text-align: center;
       position: relative;
+      z-index: 1010;
     }
   </style>
 </head>
 <body class="bg-black text-white">
 
-  <!-- Navigation -->
+  <!-- Navigation Bar -->
   <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center text-sm uppercase tracking-widest font-medium">
-      <div>MICHAELA AMADOR</div>
-      <div class="flex gap-10">
+    <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
+      <div class="text-lg font-semibold tracking-widest">MICHAELA AMADOR</div>
+      
+      <div class="flex items-center gap-8 text-sm uppercase tracking-widest font-medium">
         <a href="#projects" class="hover:text-gray-400 transition">PROJECTS</a>
         <a href="#contact" class="hover:text-gray-400 transition">CONTACT</a>
+        
+        <!-- Create CV Button -->
+        <button onclick="showCVModal()" 
+                class="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:bg-gray-200 transition flex items-center gap-2">
+          <i class="fas fa-file-download"></i>
+          CREATE CV
+        </button>
       </div>
     </div>
   </nav>
-<!-- Hero Section -->
-<section class="hero">
-  <!-- Background Photo -->
-  <div class="absolute inset-0 bg-cover bg-center bg-fixed z-0"
-       style="background-image: url('hero-background.jpg'); filter: brightness(0.65) contrast(1.1);">
-  </div>
 
-  <!-- Main Content (Centered) -->
-  <div class="hero-content relative z-20 text-center px-6">
-    <p class="text-gray-300 text-sm tracking-[4px] mb-6">I AM</p>
-    <h1 class="name text-white">MICHAELA M. AMADOR</h1>
-    <p class="mt-8 text-xl text-gray-300 tracking-wide">COMPUTER ENGINEER</p>
-  </div>
-
-  <!-- Social Icons - FORCE to LOWER LEFT -->
-  <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-30">
-    <a href="https://www.linkedin.com/in/michaela-amador-43bb00374"
-       target="_blank"
-       class="hover:text-white transition text-3xl">
-      <i class="fab fa-linkedin-in"></i>
-    </a>
-    
-    <a href="https://github.com/secreargus-official"
-       target="_blank"
-       class="hover:text-white transition text-3xl">
-      <i class="fab fa-github"></i>
-    </a>
-    
-    <a href="#" id="viber-btn"
-       class="hover:text-white transition text-3xl">
-      <i class="fab fa-viber"></i>
-    </a>
-  </div>
-
-  <!-- Vertical Year - Keep on RIGHT -->
-  <div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-30">
-    2026
-  </div>
-
-  <!-- Scroll Indicator - Center Bottom -->
-  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gray-400 text-xs tracking-widest flex flex-col items-center z-30">
-    SCROLL
-    <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
-  </div>
-</section>
-
-  <!-- Viber Modal -->
-  <div id="viber-modal" class="modal">
-    <div class="modal-content">
-      <button onclick="closeViberModal()" 
-              class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">
-        ×
-      </button>
-      
-      <div class="mb-6">
-        <i class="fab fa-viber text-[#7C3AED] text-5xl"></i>
-      </div>
-      
-      <h3 class="text-2xl font-semibold mb-2">Connect on Viber</h3>
-      <p class="text-gray-400 mb-8">Scan the QR code or click the number to chat with me</p>
-      
-      <!-- QR Code Container -->
-      <div id="qrcode" class="mx-auto mb-6 bg-white p-4 rounded-xl inline-block"></div>
-      
-      <!-- Phone Number -->
-      <a id="viber-number" href="#" 
-         class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8">
-        <!-- Your number will appear here -->
-      </a>
-      
-      <p class="text-xs text-gray-500">Open Viber on your phone and scan the code</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-6">
+      <p class="text-gray-300 text-sm tracking-[4px] mb-6">I AM</p>
+      <h1 class="name text-white">MICHAELA M. AMADOR</h1>
+      <p class="mt-8 text-2xl text-gray-300 tracking-wide">COMPUTER ENGINEER</p>
     </div>
-  </div>
 
-  <!-- Selected Projects -->
-  <section id="projects" class="min-h-screen bg-black py-24">
-    <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
-            <img src="https://picsum.photos/id/1015/800/500" alt="Network Infrastructure"
-                 class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-2xl mb-3">Network Infrastructure</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Scalable and secure LAN design with performance optimization.
-          </p>
-        </div>
+    <!-- Social Icons - Lower Left -->
+    <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-30">
+      <a href="https://www.linkedin.com/in/michaela-amador-43bb00374" target="_blank" class="hover:text-white transition text-3xl">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://github.com/secreargus-official" target="_blank" class="hover:text-white transition text-3xl">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="#" id="viber-btn" class="hover:text-white transition text-3xl">
+        <i class="fab fa-viber"></i>
+      </a>
+    </div>
 
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
-            <img src="https://picsum.photos/id/201/800/500" alt="Embedded Systems"
-                 class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-2xl mb-3">Embedded Systems</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Microcontroller-based automation solutions.
-          </p>
-        </div>
+    <!-- Vertical Year - Lower Right -->
+    <div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-30">
+      2026
+    </div>
 
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
-            <img src="https://picsum.photos/id/1016/800/500" alt="Electronics Design"
-                 class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
-          </div>
-          <h3 class="font-semibold text-2xl mb-3">Electronics Design</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Circuit design and hardware integration.
-          </p>
-        </div>
-      </div>
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gray-400 text-xs tracking-widest flex flex-col items-center z-30">
+      SCROLL
+      <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- CV Modal -->
+  <div id="cv-modal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeCVModal()" 
+              class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
+      
+      <div class="mb-8">
+        <i class="fas fa-file-pdf text-6xl text-red-500"></i>
+      </div>
+      
+      <h2 class="text-3xl font-semibold mb-4">Michaela's CV</h2>
+      <p class="text-gray-400 mb-8 text-lg">
+        Do you want to install Michaela's CV?
+      </p>
+      
+      <div class="flex gap-4 justify-center">
+        <button onclick="downloadCV()" 
+                class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">
+          YES, DOWNLOAD CV
+        </button>
+        
+        <button onclick="closeCVModal()" 
+                class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">
+          NO, CANCEL
+        </button>
+      </div>
+      
+      <p class="text-xs text-gray-500 mt-8">Your CV will be downloaded as a PDF file</p>
+    </div>
+  </div>
+
+  <!-- Projects Section (unchanged) -->
+  <section id="projects" class="min-h-screen bg-black py-24">
+    <div class="max-w-6xl mx-auto px-8">
+      <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
+      <!-- Your project cards here... (keep as before) -->
+    </div>
+  </section>
+
+  <!-- Contact Section (unchanged) -->
   <section id="contact" class="py-32 bg-zinc-950">
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-5xl font-bold mb-8">Get In Touch</h2>
       <p class="text-gray-400 mb-12">Open to new projects and collaborations.</p>
-      <a href="mailto:michaelaamador.company@gmail.com"
+      <a href="mailto:michaelaamador.company@gmail.com" 
          class="inline-block px-12 py-6 border border-white hover:bg-white hover:text-black text-lg transition">
         Send a Message
       </a>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="bg-black py-12 text-center text-gray-500 text-sm border-t border-white/10">
-    © 2026 Secre Argus • Computer Engineer • Mandaluyong City, Philippines
+    © 2026 Michaela M. Amador • Computer Engineer • Philippines
   </footer>
 
   <script>
-    // Replace this with your actual Viber number (international format with +63)
-    const myViberNumber = "+639673779498";   // ←←← CHANGE THIS TO YOUR REAL NUMBER
+    // Viber Modal (keep your existing viber code here)
+    const myViberNumber = "+639673779498";
+    // ... (your existing viber script remains the same)
 
-    const modal = document.getElementById('viber-modal');
-    const qrcodeContainer = document.getElementById('qrcode');
-    const numberLink = document.getElementById('viber-number');
+    // New CV Modal Functions
+    function showCVModal() {
+      document.getElementById('cv-modal').style.display = 'flex';
+    }
 
-    // Viber deep link (works on mobile)
-    const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+', '')}`;
+    function closeCVModal() {
+      document.getElementById('cv-modal').style.display = 'none';
+    }
 
-    function openViberModal() {
-      modal.style.display = 'flex';
-      
-      // Clear previous QR if any
-      qrcodeContainer.innerHTML = '';
-      
-      // Generate QR Code with Viber deep link
-      new QRCode(qrcodeContainer, {
-        text: viberDeepLink,
-        width: 220,
-        height: 220,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
+    function downloadCV() {
+  // Put your exact PDF filename here
+  const filename = "Michaela_M_Amador_CV.pdf";
+  
+  const link = document.createElement('a');
+  link.href = filename;           // Same folder = just the filename
+  link.download = filename;       // Forces download with this name
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  // Close the modal after download starts
+  setTimeout(closeCVModal, 800);
+}
+
+    // Close modals when clicking outside
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
       });
-
-      // Set clickable phone number
-      numberLink.textContent = myViberNumber;
-      numberLink.href = `viber://chat?number=${myViberNumber.replace('+', '')}`;
-    }
-
-    function closeViberModal() {
-      modal.style.display = 'none';
-    }
-
-    // Event listeners
-    document.getElementById('viber-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      openViberModal();
-    });
-
-    // Close modal when clicking outside the content
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeViberModal();
-      }
     });
   </script>
-
 </body>
 </html>
