@@ -40,6 +40,15 @@
       text-shadow: 0 4px 30px rgba(0,0,0,0.9);
     }
 
+    .project-card {
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -49,18 +58,28 @@
       z-index: 1000;
       align-items: center;
       justify-content: center;
+      padding: 20px;
     }
 
     .modal-content {
       background: #111;
       border: 1px solid #444;
       border-radius: 16px;
-      max-width: 420px;
-      width: 90%;
-      padding: 40px 32px;
-      text-align: center;
+      max-width: 700px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 40px;
       position: relative;
       z-index: 1010;
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #555;
+      border-radius: 20px;
     }
   </style>
 </head>
@@ -75,7 +94,6 @@
         <a href="#projects" class="hover:text-gray-400 transition">PROJECTS</a>
         <a href="#contact" class="hover:text-gray-400 transition">CONTACT</a>
         
-        <!-- Create CV Button -->
         <button onclick="showCVModal()"
                 class="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:bg-gray-200 transition flex items-center gap-2">
           <i class="fas fa-file-download"></i>
@@ -93,7 +111,7 @@
       <p class="mt-8 text-2xl text-gray-300 tracking-wide">COMPUTER ENGINEER</p>
     </div>
 
-    <!-- Social Icons - Lower Left (including Viber) -->
+    <!-- Social Icons - Lower Left -->
     <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-30">
       <a href="https://www.linkedin.com/in/michaela-amador-43bb00374" target="_blank" class="hover:text-white transition text-3xl">
         <i class="fab fa-linkedin-in"></i>
@@ -106,7 +124,7 @@
       </a>
     </div>
 
-    <!-- Vertical Year - Lower Right -->
+    <!-- Vertical Year -->
     <div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-30">
       2026
     </div>
@@ -120,55 +138,45 @@
 
   <!-- Viber Modal -->
   <div id="viber-modal" class="modal">
-    <div class="modal-content">
-      <button onclick="closeViberModal()" 
-              class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
-      
+    <div class="modal-content" style="max-width: 420px;">
+      <button onclick="closeViberModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
       <div class="mb-6">
         <i class="fab fa-viber text-[#7C3AED] text-6xl"></i>
       </div>
-      
       <h3 class="text-2xl font-semibold mb-2">Connect on Viber</h3>
       <p class="text-gray-400 mb-8">Scan the QR code or click the number to chat with me</p>
-      
       <div id="qrcode" class="mx-auto mb-6 bg-white p-4 rounded-xl inline-block"></div>
-      
-      <a id="viber-number" href="#" 
-         class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8">
-      </a>
-      
+      <a id="viber-number" href="#" class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8"></a>
       <p class="text-xs text-gray-500">Open Viber on your phone and scan the code</p>
     </div>
   </div>
 
   <!-- CV Modal -->
   <div id="cv-modal" class="modal">
-    <div class="modal-content">
-      <button onclick="closeCVModal()" 
-              class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
-      
+    <div class="modal-content" style="max-width: 420px;">
+      <button onclick="closeCVModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
       <div class="mb-8">
         <i class="fas fa-file-pdf text-6xl text-red-500"></i>
       </div>
-      
       <h2 class="text-3xl font-semibold mb-4">Micha's CV</h2>
-      <p class="text-gray-400 mb-8 text-lg">
-        Do you want to install Micha's CV?
-      </p>
-      
+      <p class="text-gray-400 mb-8 text-lg">Do you want to install Micha's CV?</p>
       <div class="flex gap-4 justify-center">
-        <button onclick="downloadCV()" 
-                class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">
-          YES
-        </button>
-        
-        <button onclick="closeCVModal()" 
-                class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">
-          CANCEL
-        </button>
+        <button onclick="downloadCV()" class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">YES</button>
+        <button onclick="closeCVModal()" class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">CANCEL</button>
       </div>
-      
       <p class="text-xs text-gray-500 mt-8">Your CV will be downloaded as a PDF file</p>
+    </div>
+  </div>
+
+  <!-- Project Detail Modal -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeProjectModal()" 
+              class="absolute top-6 right-6 text-4xl text-gray-400 hover:text-white transition">×</button>
+      
+      <div id="project-modal-content">
+        <!-- Content will be dynamically inserted here -->
+      </div>
     </div>
   </div>
 
@@ -178,37 +186,46 @@
       <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
+        <!-- Project 1 -->
+        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
+          <div class="overflow-hidden">
             <img src="https://picsum.photos/id/1015/800/500" alt="Network Infrastructure"
                  class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
           </div>
-          <h3 class="font-semibold text-2xl mb-3">Network Infrastructure</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Scalable and secure LAN design with performance optimization.
-          </p>
+          <div class="p-8">
+            <h3 class="font-semibold text-2xl mb-3">Network Infrastructure</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Scalable and secure LAN design with performance optimization.
+            </p>
+          </div>
         </div>
-        
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
+
+        <!-- Project 2 -->
+        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(2)">
+          <div class="overflow-hidden">
             <img src="https://picsum.photos/id/201/800/500" alt="Embedded Systems"
                  class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
           </div>
-          <h3 class="font-semibold text-2xl mb-3">Embedded Systems</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Microcontroller-based automation solutions.
-          </p>
+          <div class="p-8">
+            <h3 class="font-semibold text-2xl mb-3">Embedded Systems</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Microcontroller-based automation solutions.
+            </p>
+          </div>
         </div>
-        
-        <div class="project-card text-center">
-          <div class="overflow-hidden rounded-2xl mb-6 shadow-xl">
+
+        <!-- Project 3 -->
+        <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
+          <div class="overflow-hidden">
             <img src="https://picsum.photos/id/1016/800/500" alt="Electronics Design"
                  class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
           </div>
-          <h3 class="font-semibold text-2xl mb-3">Electronics Design</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Circuit design and hardware integration.
-          </p>
+          <div class="p-8">
+            <h3 class="font-semibold text-2xl mb-3">Electronics Design</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Circuit design and hardware integration.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -233,11 +250,11 @@
   <script>
     // ==================== VIBER MODAL ====================
     const myViberNumber = "+639673779498";
-    const viberModal = document.getElementById('viber-modal');
-    const qrcodeContainer = document.getElementById('qrcode');
-    const numberLink = document.getElementById('viber-number');
-
     function openViberModal() {
+      const viberModal = document.getElementById('viber-modal');
+      const qrcodeContainer = document.getElementById('qrcode');
+      const numberLink = document.getElementById('viber-number');
+      
       viberModal.style.display = 'flex';
       qrcodeContainer.innerHTML = '';
 
@@ -257,10 +274,9 @@
     }
 
     function closeViberModal() {
-      viberModal.style.display = 'none';
+      document.getElementById('viber-modal').style.display = 'none';
     }
 
-    // Attach Viber button click
     document.getElementById('viber-btn').addEventListener('click', function(e) {
       e.preventDefault();
       openViberModal();
@@ -276,19 +292,86 @@
     }
 
     function downloadCV() {
-      const filename = "Michaela_M_Amador_CV.pdf";   // ← Change if your filename is different
-      
+      const filename = "Michaela_M_Amador_CV.pdf";
       const link = document.createElement('a');
       link.href = filename;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
       setTimeout(closeCVModal, 800);
     }
 
-    // Close modals when clicking outside
+    // ==================== PROJECT MODALS ====================
+    const projectData = {
+      1: {
+        title: "Network Infrastructure",
+        content: `
+          <h2 class="text-4xl font-bold mb-6">Network Infrastructure</h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6">
+            Designed and implemented a scalable and secure Local Area Network (LAN) for a multi-floor office building.
+          </p>
+          <h4 class="text-xl font-semibold mb-3">Key Features:</h4>
+          <ul class="list-disc list-inside text-gray-400 space-y-2 mb-8">
+            <li>High-speed Gigabit Ethernet backbone</li>
+            <li>Advanced firewall and intrusion detection system</li>
+            <li>VLAN segmentation for different departments</li>
+            <li>Wireless coverage with seamless roaming</li>
+            <li>Performance monitoring and optimization tools</li>
+          </ul>
+          <p class="text-gray-400">Technologies used: Cisco switches, Ubiquiti UniFi, pfSense, and SolarWinds monitoring.</p>
+        `
+      },
+      2: {
+        title: "Embedded Systems",
+        content: `
+          <h2 class="text-4xl font-bold mb-6">Embedded Systems</h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6">
+            Developed microcontroller-based automation solutions for industrial and home applications.
+          </p>
+          <h4 class="text-xl font-semibold mb-3">Project Highlights:</h4>
+          <ul class="list-disc list-inside text-gray-400 space-y-2 mb-8">
+            <li>Smart irrigation system using ESP32 and soil moisture sensors</li>
+            <li>Real-time temperature and humidity monitoring</li>
+            <li>Automated alert system via SMS and mobile app</li>
+            <li>Low-power design for long battery life</li>
+          </ul>
+          <p class="text-gray-400">Tools: Arduino IDE, ESP-IDF, FreeRTOS, and custom PCB design.</p>
+        `
+      },
+      3: {
+        title: "Electronics Design",
+        content: `
+          <h2 class="text-4xl font-bold mb-6">Electronics Design</h2>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6">
+            Full-cycle circuit design, simulation, and hardware integration for various applications.
+          </p>
+          <h4 class="text-xl font-semibold mb-3">Scope of Work:</h4>
+          <ul class="list-disc list-inside text-gray-400 space-y-2 mb-8">
+            <li>Analog and digital circuit design</li>
+            <li>PCB layout and routing using KiCad</li>
+            <li>Component selection and bill of materials</li>
+            <li>Prototyping and testing</li>
+            <li>Integration with microcontrollers and sensors</li>
+          </ul>
+          <p class="text-gray-400">Delivered working prototypes with full documentation and testing reports.</p>
+        `
+      }
+    };
+
+    function showProjectModal(id) {
+      const modal = document.getElementById('project-modal');
+      const contentDiv = document.getElementById('project-modal-content');
+      
+      contentDiv.innerHTML = projectData[id].content;
+      modal.style.display = 'flex';
+    }
+
+    function closeProjectModal() {
+      document.getElementById('project-modal').style.display = 'none';
+    }
+
+    // Close all modals when clicking outside
     document.querySelectorAll('.modal').forEach(modal => {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) {
