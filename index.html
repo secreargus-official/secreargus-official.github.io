@@ -24,7 +24,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: url('micha's-background.jpg');
+      background-image: url('michas-background.jpg');   /* Fixed: removed apostrophe */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -161,7 +161,7 @@
     </div>
   </section>
 
-  <!-- Viber & CV Modals (unchanged) -->
+  <!-- Viber Modal -->
   <div id="viber-modal" class="modal">
     <div class="modal-content" style="max-width: 420px;">
       <button onclick="closeViberModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
@@ -174,6 +174,7 @@
     </div>
   </div>
 
+  <!-- CV Modal -->
   <div id="cv-modal" class="modal">
     <div class="modal-content" style="max-width: 420px;">
       <button onclick="closeCVModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
@@ -221,7 +222,7 @@
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Embedded Systems</h3><p class="text-gray-400">Microcontroller-based automation.</p></div>
         </div>
 
-        <!-- Electronics - CHANGE THIS TO YOUR PHOTO -->
+        <!-- Electronics -->
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
           <div class="overflow-hidden">
             <img src="images/electronics-main.jpg" 
@@ -236,7 +237,7 @@
     </div>
   </section>
 
-  <!-- Contact & Footer (unchanged) -->
+  <!-- Contact -->
   <section id="contact" class="py-32 bg-zinc-950">
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-5xl font-bold mb-8">Get In Touch</h2>
@@ -250,7 +251,7 @@
   </footer>
 
   <script>
-    // Viber & CV (unchanged)
+    // Viber & CV
     const myViberNumber = "+639673779498";
     function openViberModal() {
       const viberModal = document.getElementById('viber-modal');
@@ -275,34 +276,22 @@
       setTimeout(closeCVModal, 800);
     }
 
-    // Updated Project Data - Using images/ folder
+    // Project Data
     const projectData = {
       1: {
         title: "Network Infrastructure",
         mainDesc: "Designed and implemented a scalable and secure Local Area Network for a multi-floor office building.",
-        photos: [
-          "images/network-1.jpg",
-          "images/network-2.jpg",
-          "images/network-3.jpg"
-        ]
+        photos: ["images/network-1.jpg", "images/network-2.jpg", "images/network-3.jpg"]
       },
       2: {
         title: "Embedded Systems",
         mainDesc: "Developed microcontroller-based automation solutions using ESP32 and Arduino platforms.",
-        photos: [
-          "images/embedded-1.jpg",
-          "images/embedded-2.jpg",
-          "images/embedded-3.jpg"
-        ]
+        photos: ["images/embedded-1.jpg", "images/embedded-2.jpg", "images/embedded-3.jpg"]
       },
       3: {
         title: "Electronics Design",
         mainDesc: "Full-cycle analog & digital circuit design, PCB layout, and hardware prototyping.",
-        photos: [
-          "images/electronics-main.jpg",     // Main image shown in card + pop-up
-          "images/electronics-2.jpg",
-          "images/electronics-3.jpg"
-        ]
+        photos: ["images/electronics-main.jpg", "images/electronics-2.jpg", "images/electronics-3.jpg"]
       }
     };
 
