@@ -24,7 +24,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: url('michas-background.jpg');   /* Fixed: removed apostrophe */
+      background-image: url("micha's-background.jpg");   /* Fixed with double quotes */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -210,19 +210,16 @@
       <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <!-- Network -->
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
           <div class="overflow-hidden"><img src="images/network-main.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Network Infrastructure</h3><p class="text-gray-400">Scalable and secure LAN design.</p></div>
         </div>
 
-        <!-- Embedded -->
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(2)">
           <div class="overflow-hidden"><img src="images/embedded-main.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Embedded Systems</h3><p class="text-gray-400">Microcontroller-based automation.</p></div>
         </div>
 
-        <!-- Electronics -->
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
           <div class="overflow-hidden">
             <img src="images/electronics-main.jpg" 
@@ -251,8 +248,8 @@
   </footer>
 
   <script>
-    // Viber & CV
     const myViberNumber = "+639673779498";
+
     function openViberModal() {
       const viberModal = document.getElementById('viber-modal');
       const qrcodeContainer = document.getElementById('qrcode');
@@ -261,22 +258,38 @@
       qrcodeContainer.innerHTML = '';
       const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+', '')}`;
       new QRCode(qrcodeContainer, { text: viberDeepLink, width: 220, height: 220, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
-      numberLink.textContent = myViberNumber; numberLink.href = viberDeepLink;
+      numberLink.textContent = myViberNumber; 
+      numberLink.href = viberDeepLink;
     }
-    function closeViberModal() { document.getElementById('viber-modal').style.display = 'none'; }
-    document.getElementById('viber-btn').addEventListener('click', (e) => { e.preventDefault(); openViberModal(); });
 
-    function showCVModal() { document.getElementById('cv-modal').style.display = 'flex'; }
-    function closeCVModal() { document.getElementById('cv-modal').style.display = 'none'; }
+    function closeViberModal() { 
+      document.getElementById('viber-modal').style.display = 'none'; 
+    }
+
+    document.getElementById('viber-btn').addEventListener('click', (e) => { 
+      e.preventDefault(); 
+      openViberModal(); 
+    });
+
+    function showCVModal() { 
+      document.getElementById('cv-modal').style.display = 'flex'; 
+    }
+
+    function closeCVModal() { 
+      document.getElementById('cv-modal').style.display = 'none'; 
+    }
+
     function downloadCV() {
       const filename = "Michaela_M_Amador_CV.pdf";
       const link = document.createElement('a');
-      link.href = filename; link.download = filename;
-      document.body.appendChild(link); link.click(); document.body.removeChild(link);
+      link.href = filename; 
+      link.download = filename;
+      document.body.appendChild(link); 
+      link.click(); 
+      document.body.removeChild(link);
       setTimeout(closeCVModal, 800);
     }
 
-    // Project Data
     const projectData = {
       1: {
         title: "Network Infrastructure",
@@ -306,9 +319,7 @@
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
           <h2 class="absolute bottom-8 left-8 text-4xl font-bold text-white">${p.title}</h2>
         </div>
-
         <p class="text-gray-300 text-lg leading-relaxed mb-10">${p.mainDesc}</p>
-
         <h4 class="text-xl font-semibold mb-5 text-white">Project Gallery</h4>
         <div class="photo-grid">
           ${p.photos.map((src, index) => `
