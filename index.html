@@ -7,31 +7,27 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    
+   
     body { font-family: 'Inter', system-ui, sans-serif; }
-
     .hero {
       height: 100vh;
       position: relative;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background-image: url("micha's-background.jpg");   /* Fixed with double quotes */
+      background-image: url("micha's-background.jpg");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       filter: brightness(0.65) contrast(1.1);
       z-index: 1;
     }
-
     .name {
       font-size: 5.2rem;
       font-weight: 700;
@@ -39,17 +35,14 @@
       line-height: 1;
       text-shadow: 0 4px 30px rgba(0,0,0,0.9);
     }
-
     .project-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
     }
-
     .project-card:hover {
       transform: translateY(-15px) scale(1.02);
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
     }
-
     .modal {
       display: none;
       position: fixed;
@@ -62,7 +55,6 @@
       justify-content: center;
       padding: 20px;
     }
-
     .modal-content {
       background: linear-gradient(145deg, #1a1a1a, #111111);
       border: 1px solid rgba(255,255,255,0.08);
@@ -76,18 +68,15 @@
       padding: 40px;
       scrollbar-width: none;
     }
-
     .modal-content::-webkit-scrollbar {
       display: none;
     }
-
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 24px;
       margin-top: 32px;
     }
-
     .photo-grid img {
       width: 100%;
       height: 170px;
@@ -97,12 +86,10 @@
       border: 1px solid rgba(255,255,255,0.06);
       cursor: zoom-in;
     }
-
     .photo-grid img:hover {
       transform: scale(1.05);
       box-shadow: 0 15px 20px -5px rgb(0 0 0 / 0.5);
     }
-
     #lightbox {
       display: none;
       position: fixed;
@@ -114,7 +101,6 @@
       justify-content: center;
       padding: 20px;
     }
-
     #lightbox img {
       max-width: 95%;
       max-height: 92vh;
@@ -124,7 +110,6 @@
   </style>
 </head>
 <body class="bg-black text-white">
-
   <!-- Navigation Bar -->
   <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
@@ -146,15 +131,12 @@
       <h1 class="name text-white">MICHAELA M. AMADOR</h1>
       <p class="mt-8 text-2xl text-gray-300 tracking-wide">COMPUTER ENGINEER</p>
     </div>
-
     <div class="absolute bottom-12 left-8 flex flex-col gap-6 text-gray-400 z-30">
       <a href="https://www.linkedin.com/in/michaela-amador-43bb00374" target="_blank" class="hover:text-white transition text-3xl"><i class="fab fa-linkedin-in"></i></a>
       <a href="https://github.com/secreargus-official" target="_blank" class="hover:text-white transition text-3xl"><i class="fab fa-github"></i></a>
       <a href="#" id="viber-btn" class="hover:text-white transition text-3xl"><i class="fab fa-viber"></i></a>
     </div>
-
     <div class="absolute bottom-12 right-8 text-xs tracking-[3px] text-gray-400 rotate-90 origin-bottom-right z-30">2026</div>
-
     <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gray-400 text-xs tracking-widest flex flex-col items-center z-30">
       SCROLL
       <div class="w-px h-16 bg-gradient-to-b from-transparent via-white/30 to-transparent mt-2"></div>
@@ -179,13 +161,13 @@
     <div class="modal-content" style="max-width: 420px;">
       <button onclick="closeCVModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
       <div class="mb-8"><i class="fas fa-file-pdf text-6xl text-red-500"></i></div>
-      <h2 class="text-3xl font-semibold mb-4">Micha's CV</h2>
-      <p class="text-gray-400 mb-8 text-lg">Do you want to install Micha's CV?</p>
+      <h2 class="text-3xl font-semibold mb-4">CV</h2>
+      <p class="text-gray-400 mb-8 text-lg">Download Michaela M. Amador's latest CV (PDF).</p>
       <div class="flex gap-4 justify-center">
-        <button onclick="downloadCV()" class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">YES</button>
+        <button onclick="downloadCV()" class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">DOWNLOAD CV</button>
         <button onclick="closeCVModal()" class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">CANCEL</button>
       </div>
-      <p class="text-xs text-gray-500 mt-8">Your CV will be downloaded as a PDF file</p>
+      <p class="text-xs text-gray-500 mt-8">The file "Amador_CV_2026.pdf" will be downloaded.</p>
     </div>
   </div>
 
@@ -200,7 +182,7 @@
   <!-- Lightbox -->
   <div id="lightbox" onclick="closeLightbox()">
     <img id="lightbox-image" src="" alt="Enlarged photo">
-    <button onclick="event.stopImmediatePropagation(); closeLightbox()" 
+    <button onclick="event.stopImmediatePropagation(); closeLightbox()"
             class="absolute top-6 right-6 text-5xl text-white hover:text-gray-300 transition">×</button>
   </div>
 
@@ -208,21 +190,19 @@
   <section id="projects" class="min-h-screen bg-black py-24">
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
-      
+     
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
           <div class="overflow-hidden"><img src="images/Networking.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Network Infrastructure</h3><p class="text-gray-400">Scalable and secure LAN design.</p></div>
         </div>
-
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(2)">
           <div class="overflow-hidden"><img src="images/embedded-main.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Embedded Systems</h3><p class="text-gray-400">Microcontroller-based automation.</p></div>
         </div>
-
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
           <div class="overflow-hidden">
-            <img src="images/Electronics2.jpg" 
+            <img src="images/Electronics2.jpg"
                  class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
           </div>
           <div class="p-8">
@@ -257,39 +237,47 @@
       viberModal.style.display = 'flex';
       qrcodeContainer.innerHTML = '';
       const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+', '')}`;
-      new QRCode(qrcodeContainer, { text: viberDeepLink, width: 220, height: 220, colorDark: "#000000", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.H });
-      numberLink.textContent = myViberNumber; 
+      new QRCode(qrcodeContainer, { 
+        text: viberDeepLink, 
+        width: 220, 
+        height: 220, 
+        colorDark: "#000000", 
+        colorLight: "#ffffff", 
+        correctLevel: QRCode.CorrectLevel.H 
+      });
+      numberLink.textContent = myViberNumber;
       numberLink.href = viberDeepLink;
     }
 
-    function closeViberModal() { 
-      document.getElementById('viber-modal').style.display = 'none'; 
+    function closeViberModal() {
+      document.getElementById('viber-modal').style.display = 'none';
     }
 
-    document.getElementById('viber-btn').addEventListener('click', (e) => { 
-      e.preventDefault(); 
-      openViberModal(); 
+    document.getElementById('viber-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      openViberModal();
     });
 
-    function showCVModal() { 
-      document.getElementById('cv-modal').style.display = 'flex'; 
+    function showCVModal() {
+      document.getElementById('cv-modal').style.display = 'flex';
     }
 
-    function closeCVModal() { 
-      document.getElementById('cv-modal').style.display = 'none'; 
+    function closeCVModal() {
+      document.getElementById('cv-modal').style.display = 'none';
     }
 
     function downloadCV() {
-      const filename = "Michaela_M_Amador_CV.pdf";
+      const filename = "Amador_CV_2026.pdf";
       const link = document.createElement('a');
-      link.href = filename; 
+      link.href = filename;        // Make sure this file is in the same folder as your HTML
       link.download = filename;
-      document.body.appendChild(link); 
-      link.click(); 
+      document.body.appendChild(link);
+      link.click();
       document.body.removeChild(link);
       setTimeout(closeCVModal, 800);
     }
 
+    // Project data and modals (unchanged from your original)
     const projectData = {
       1: {
         title: "Network Infrastructure",
@@ -312,7 +300,6 @@
       const modal = document.getElementById('project-modal');
       const contentDiv = document.getElementById('project-modal-content');
       const p = projectData[id];
-
       let html = `
         <div class="relative rounded-2xl overflow-hidden mb-8">
           <img src="${p.photos[0]}" class="w-full h-72 object-cover">
@@ -323,13 +310,12 @@
         <h4 class="text-xl font-semibold mb-5 text-white">Project Gallery</h4>
         <div class="photo-grid">
           ${p.photos.map((src, index) => `
-            <img src="${src}" 
-                 onclick="openLightbox('${src}')" 
+            <img src="${src}"
+                 onclick="openLightbox('${src}')"
                  alt="${p.title} photo ${index + 1}">
           `).join('')}
         </div>
       `;
-
       contentDiv.innerHTML = html;
       modal.style.display = 'flex';
     }
@@ -349,6 +335,7 @@
       document.getElementById('lightbox').style.display = 'none';
     }
 
+    // Close modals when clicking outside
     document.querySelectorAll('.modal').forEach(modal => {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) modal.style.display = 'none';
