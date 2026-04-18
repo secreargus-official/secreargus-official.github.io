@@ -9,8 +9,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
+ 
     body { font-family: 'Inter', system-ui, sans-serif; }
+
     .hero {
       height: 100vh;
       position: relative;
@@ -28,6 +29,7 @@
       filter: brightness(0.65) contrast(1.1);
       z-index: 1;
     }
+
     .name {
       font-size: 5.2rem;
       font-weight: 700;
@@ -35,6 +37,7 @@
       line-height: 1;
       text-shadow: 0 4px 30px rgba(0,0,0,0.9);
     }
+
     .project-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
@@ -43,6 +46,7 @@
       transform: translateY(-15px) scale(1.02);
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
     }
+
     .modal {
       display: none;
       position: fixed;
@@ -55,6 +59,7 @@
       justify-content: center;
       padding: 20px;
     }
+
     .modal-content {
       background: linear-gradient(145deg, #1a1a1a, #111111);
       border: 1px solid rgba(255,255,255,0.08);
@@ -68,9 +73,7 @@
       padding: 40px;
       scrollbar-width: none;
     }
-    .modal-content::-webkit-scrollbar {
-      display: none;
-    }
+
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -90,6 +93,7 @@
       transform: scale(1.05);
       box-shadow: 0 15px 20px -5px rgb(0 0 0 / 0.5);
     }
+
     #lightbox {
       display: none;
       position: fixed;
@@ -108,27 +112,51 @@
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.8);
     }
 
-    /* Ladder Experience Styles */
+    /* Clean Black & White Ladder */
     .ladder-line {
       position: absolute;
-      left: 50%;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: linear-gradient(to bottom, transparent, #3b82f6, #60a5fa, transparent);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+      left: 50px;
+      top: 30px;
+      bottom: 30px;
+      width: 3px;
+      background: linear-gradient(to bottom, transparent, #e5e5e5, #ffffff, transparent);
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
     }
+
     .experience-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      transform: translateY(40px);
     }
+    
+    .experience-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .experience-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 40px -10px rgba(0, 0, 0, 0.6);
     }
+
     .rung {
       height: 3px;
-      background: #64748b;
-      box-shadow: 0 0 8px rgba(100, 116, 139, 0.5);
+      background: #71717a;
+      box-shadow: 0 0 6px rgba(163, 163, 163, 0.3);
+    }
+
+    .timeline-dot {
+      width: 20px;
+      height: 20px;
+      background: #111;
+      border: 4px solid #fff;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.15);
+      transition: all 0.3s ease;
+    }
+    .timeline-dot:hover {
+      background: #fff;
+      border-color: #000;
+      transform: scale(1.2);
     }
   </style>
 </head>
@@ -214,8 +242,7 @@
   <!-- Projects Section -->
   <section id="projects" class="min-h-screen bg-black py-24">
     <div class="max-w-6xl mx-auto px-8">
-      <h2 class="text-6xl font-bold text-center mb-20 text-white">Projects</h2>
-    
+      <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
           <div class="overflow-hidden"><img src="images/Networking.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
@@ -238,26 +265,21 @@
     </div>
   </section>
 
-  <!-- Work Experience Ladder Section -->
+  <!-- Experience Section - All Left Side -->
   <section id="experience" class="min-h-screen bg-zinc-950 py-24 relative">
     <div class="max-w-5xl mx-auto px-8">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-white mb-4">Career</h2>
+        <h2 class="text-6xl font-bold text-white mb-4">My Career Ladder</h2>
         <p class="text-gray-400 text-xl max-w-md mx-auto">Progressing through roles, building expertise one step at a time.</p>
       </div>
-
-      <div class="relative max-w-3xl mx-auto">
-        <!-- Central Ladder Line -->
+      <div class="relative max-w-3xl mx-auto pl-16">
         <div class="ladder-line hidden md:block"></div>
-
-        <div id="experience-container" class="space-y-20 relative">
-          <!-- Populated by JavaScript -->
-        </div>
+        <div id="experience-container" class="space-y-24 relative"></div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact -->
   <section id="contact" class="py-32 bg-zinc-950">
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-5xl font-bold mb-8">Get In Touch</h2>
@@ -291,29 +313,15 @@
       numberLink.textContent = myViberNumber;
       numberLink.href = viberDeepLink;
     }
+    function closeViberModal() { document.getElementById('viber-modal').style.display = 'none'; }
+    document.getElementById('viber-btn').addEventListener('click', (e) => { e.preventDefault(); openViberModal(); });
 
-    function closeViberModal() {
-      document.getElementById('viber-modal').style.display = 'none';
-    }
-
-    document.getElementById('viber-btn').addEventListener('click', (e) => {
-      e.preventDefault();
-      openViberModal();
-    });
-
-    function showCVModal() {
-      document.getElementById('cv-modal').style.display = 'flex';
-    }
-
-    function closeCVModal() {
-      document.getElementById('cv-modal').style.display = 'none';
-    }
-
+    function showCVModal() { document.getElementById('cv-modal').style.display = 'flex'; }
+    function closeCVModal() { document.getElementById('cv-modal').style.display = 'none'; }
     function downloadCV() {
-      const filename = "Amador_CV_2026.pdf";
       const link = document.createElement('a');
-      link.href = filename;
-      link.download = filename;
+      link.href = "Amador_CV_2026.pdf";
+      link.download = "Amador_CV_2026.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -322,21 +330,9 @@
 
     // Project Data
     const projectData = {
-      1: {
-        title: "Network Infrastructure",
-        mainDesc: "Designed and implemented a scalable and secure Local Area Network for a multi-floor office building.",
-        photos: ["images/network-1.jpg", "images/network-2.jpg", "images/network-3.jpg"]
-      },
-      2: {
-        title: "Embedded Systems",
-        mainDesc: "Developed microcontroller-based automation solutions using ESP32 and Arduino platforms.",
-        photos: ["images/Microcontrollers.jpg", "images/embedded-2.jpg", "images/embedded-3.jpg"]
-      },
-      3: {
-        title: "Electronics Design",
-        mainDesc: "Full-cycle analog & digital circuit design, PCB layout, and hardware prototyping.",
-        photos: ["images/Electronics.jpg", "images/electronics-2.jpg", "images/electronics-3.jpg"]
-      }
+      1: { title: "Network Infrastructure", mainDesc: "Designed and implemented a scalable and secure Local Area Network for a multi-floor office building.", photos: ["images/network-1.jpg", "images/network-2.jpg", "images/network-3.jpg"] },
+      2: { title: "Embedded Systems", mainDesc: "Developed microcontroller-based automation solutions using ESP32 and Arduino platforms.", photos: ["images/Microcontrollers.jpg", "images/embedded-2.jpg", "images/embedded-3.jpg"] },
+      3: { title: "Electronics Design", mainDesc: "Full-cycle analog & digital circuit design, PCB layout, and hardware prototyping.", photos: ["images/Electronics.jpg", "images/electronics-2.jpg", "images/electronics-3.jpg"] }
     };
 
     function showProjectModal(id) {
@@ -352,31 +348,20 @@
         <p class="text-gray-300 text-lg leading-relaxed mb-10">${p.mainDesc}</p>
         <h4 class="text-xl font-semibold mb-5 text-white">Project Gallery</h4>
         <div class="photo-grid">
-          ${p.photos.map((src, index) => `
-            <img src="${src}" onclick="openLightbox('${src}')" alt="${p.title} photo ${index + 1}">
-          `).join('')}
+          ${p.photos.map((src, i) => `<img src="${src}" onclick="openLightbox('${src}')" alt="photo ${i+1}">`).join('')}
         </div>
       `;
       contentDiv.innerHTML = html;
       modal.style.display = 'flex';
     }
-
-    function closeProjectModal() {
-      document.getElementById('project-modal').style.display = 'none';
-    }
-
+    function closeProjectModal() { document.getElementById('project-modal').style.display = 'none'; }
     function openLightbox(src) {
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImg = document.getElementById('lightbox-image');
-      lightboxImg.src = src;
-      lightbox.style.display = 'flex';
+      document.getElementById('lightbox-image').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
     }
+    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-
-    // ==================== EXPERIENCE LADDER ====================
+    // Experience Data
     const experienceData = [
       {
         position: "System Engineer - Part Time",
@@ -384,13 +369,7 @@
         dates: "Feb 2026 – Present",
         location: "Makati City, Philippines",
         desc: "Leading infrastructure projects and mentoring junior engineers.",
-        achievements: [
-          "Enterprise network systems, IoT / smart device ecosystems",
-          "Industrial automation & control systems",
-          "Telecom or data-center infrastructure"
-          "Embedded systems for electronics products"
-          "Building management or security systems"
-        ]
+        achievements: ["Enterprise network systems, IoT / smart device ecosystems", "Industrial automation & control systems", "Telecom or data-center infrastructure", "Embedded systems for electronics products", "Building management or security systems"]
       },
       {
         position: "IT Technician - Intern",
@@ -398,11 +377,7 @@
         dates: "Feb 2026 – April 2026",
         location: "Makati, Philippines",
         desc: "Assisting technical problems.",
-        achievements: [
-          "IP Configurations (CCTV)",
-          "Sound Systems",
-          "Drafting AutoCAD"
-        ]
+        achievements: ["IP Configurations (CCTV)", "Sound Systems", "Drafting AutoCAD"]
       },
       {
         position: "Electronics Technician",
@@ -410,11 +385,7 @@
         dates: "Nov 2024 – Feb 2025",
         location: "Mandaluyong, Philippines",
         desc: "Fixing Electronics, Gadgets etc.",
-        achievements: [
-          "Fixing Phones & Laptops - Software",
-          "Fixing Phones & Laptops - Hardware",
-          "Installing Bios, etc."
-        ]
+        achievements: ["Fixing Phones & Laptops - Software", "Fixing Phones & Laptops - Hardware", "Installing Bios, etc."]
       }
     ];
 
@@ -423,50 +394,49 @@
       let html = '';
 
       experienceData.forEach((exp, index) => {
-        const isEven = index % 2 === 0;
-        const sideClass = isEven ? 'md:ml-auto md:pl-12' : 'md:ml-auto md:pl-12';
-        const dotPosition = isEven ? 'left-1/2 -translate-x-1/2 md:left-0' : 'left-1/2 -translate-x-1/2 md:left-0';
-
         html += `
-          <div class="relative experience-card group">
-            <div class="rung w-24 mx-auto mb-8"></div>
-            <div class="flex flex-col md:flex-row gap-8 items-start ${sideClass}">
-              <div class="flex-shrink-0 bg-zinc-900 border border-white-500/30 text-white-400 px-6 py-3 rounded-2xl text-sm font-medium whitespace-nowrap shadow-inner">
+          <div class="experience-card group relative" style="animation-delay: ${index * 150}ms">
+            <div class="rung w-28 mx-auto mb-12"></div>
+            <div class="flex items-start gap-10 relative">
+              <div class="flex-shrink-0 bg-zinc-900 border border-white/30 text-white px-7 py-3.5 rounded-3xl text-sm font-medium whitespace-nowrap shadow-inner z-10 w-52 text-center">
                 ${exp.dates}
               </div>
-              <div class="flex-1 bg-zinc-900/80 border border-white/10 rounded-3xl p-8 hover:border-white-500/50 transition-all">
+              <div class="flex-1 bg-zinc-900/80 border border-white/10 rounded-3xl p-8 hover:border-white/30 transition-all">
                 <div class="flex items-center gap-3 mb-4">
-                  <div class="w-3 h-3 rounded-full bg-white-500"></div>
+                  <div class="w-3 h-3 rounded-full bg-white"></div>
                   <h3 class="text-2xl font-semibold">${exp.position}</h3>
                 </div>
-                <p class="text-blue-400 font-medium">${exp.company} • ${exp.location}</p>
-                <p class="text-gray-400 mt-4 leading-relaxed">${exp.desc}</p>
+                <p class="text-gray-400 font-medium">${exp.company} • ${exp.location}</p>
+                <p class="text-gray-300 mt-4 leading-relaxed">${exp.desc}</p>
                 <ul class="mt-6 space-y-3 text-gray-300">
-                  ${exp.achievements.map(ach => `
-                    <li class="flex items-start gap-3">
-                      <span class="text-emerald-400 mt-1.5">→</span>
-                      <span>${ach}</span>
-                    </li>
-                  `).join('')}
+                  ${exp.achievements.map(ach => `<li class="flex items-start gap-3"><span class="text-white mt-1.5">→</span><span>${ach}</span></li>`).join('')}
                 </ul>
               </div>
             </div>
-            <div class="absolute top-12 ${dotPosition} w-6 h-6 bg-black border-4 border-white-500 rounded-full shadow-lg hidden md:block"></div>
+            <div class="absolute top-[58px] left-[-9px] md:left-[41px] timeline-dot rounded-full hidden md:block z-20"></div>
           </div>
         `;
       });
 
       container.innerHTML = html;
+
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.experience-card');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.15 });
+        cards.forEach(card => observer.observe(card));
+      }, 100);
     }
 
-    // Close modals when clicking outside
+    // Close modals on outside click
     document.querySelectorAll('.modal').forEach(modal => {
-      modal.addEventListener('click', function(e) {
+      modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
       });
     });
 
-    // Initialize everything when page loads
+    // Initialize
     window.addEventListener('load', () => {
       renderExperience();
     });
