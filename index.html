@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-   
+  
     body { font-family: 'Inter', system-ui, sans-serif; }
     .hero {
       height: 100vh;
@@ -107,15 +107,40 @@
       border-radius: 12px;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.8);
     }
+
+    /* Ladder Experience Styles */
+    .ladder-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, transparent, #3b82f6, #60a5fa, transparent);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+    }
+    .experience-card {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .experience-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+    }
+    .rung {
+      height: 3px;
+      background: #64748b;
+      box-shadow: 0 0 8px rgba(100, 116, 139, 0.5);
+    }
   </style>
 </head>
 <body class="bg-black text-white">
+
   <!-- Navigation Bar -->
   <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
       <div class="text-lg font-semibold tracking-widest">MICHAELA AMADOR</div>
       <div class="flex items-center gap-8 text-sm uppercase tracking-widest font-medium">
         <a href="#projects" class="hover:text-gray-400 transition">PROJECTS</a>
+        <a href="#experience" class="hover:text-gray-400 transition">EXPERIENCE</a>
         <a href="#contact" class="hover:text-gray-400 transition">CONTACT</a>
         <button onclick="showCVModal()" class="bg-white text-black px-6 py-2.5 rounded-full font-semibold hover:bg-gray-200 transition flex items-center gap-2">
           <i class="fas fa-file-download"></i> CV
@@ -182,7 +207,7 @@
   <!-- Lightbox -->
   <div id="lightbox" onclick="closeLightbox()">
     <img id="lightbox-image" src="" alt="Enlarged photo">
-    <button onclick="event.stopImmediatePropagation(); closeLightbox()"
+    <button onclick="event.stopImmediatePropagation(); closeLightbox()" 
             class="absolute top-6 right-6 text-5xl text-white hover:text-gray-300 transition">×</button>
   </div>
 
@@ -190,7 +215,7 @@
   <section id="projects" class="min-h-screen bg-black py-24">
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
-     
+    
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
           <div class="overflow-hidden"><img src="images/Networking.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
@@ -202,8 +227,7 @@
         </div>
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
           <div class="overflow-hidden">
-            <img src="images/Electronics2.jpg"
-                 class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
+            <img src="images/Electronics2.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
           </div>
           <div class="p-8">
             <h3 class="font-semibold text-2xl mb-2">Electronics Design</h3>
@@ -214,7 +238,26 @@
     </div>
   </section>
 
-  <!-- Contact -->
+  <!-- Work Experience Ladder Section -->
+  <section id="experience" class="min-h-screen bg-zinc-950 py-24 relative">
+    <div class="max-w-5xl mx-auto px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-6xl font-bold text-white mb-4">My Career Ladder</h2>
+        <p class="text-gray-400 text-xl max-w-md mx-auto">Progressing through roles, building expertise one step at a time.</p>
+      </div>
+
+      <div class="relative max-w-3xl mx-auto">
+        <!-- Central Ladder Line -->
+        <div class="ladder-line hidden md:block"></div>
+
+        <div id="experience-container" class="space-y-20 relative">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
   <section id="contact" class="py-32 bg-zinc-950">
     <div class="max-w-4xl mx-auto px-8 text-center">
       <h2 class="text-5xl font-bold mb-8">Get In Touch</h2>
@@ -237,13 +280,13 @@
       viberModal.style.display = 'flex';
       qrcodeContainer.innerHTML = '';
       const viberDeepLink = `viber://chat?number=${myViberNumber.replace('+', '')}`;
-      new QRCode(qrcodeContainer, { 
-        text: viberDeepLink, 
-        width: 220, 
-        height: 220, 
-        colorDark: "#000000", 
-        colorLight: "#ffffff", 
-        correctLevel: QRCode.CorrectLevel.H 
+      new QRCode(qrcodeContainer, {
+        text: viberDeepLink,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
       });
       numberLink.textContent = myViberNumber;
       numberLink.href = viberDeepLink;
@@ -269,7 +312,7 @@
     function downloadCV() {
       const filename = "Amador_CV_2026.pdf";
       const link = document.createElement('a');
-      link.href = filename;        // Make sure this file is in the same folder as your HTML
+      link.href = filename;
       link.download = filename;
       document.body.appendChild(link);
       link.click();
@@ -277,7 +320,7 @@
       setTimeout(closeCVModal, 800);
     }
 
-    // Project data and modals (unchanged from your original)
+    // Project Data
     const projectData = {
       1: {
         title: "Network Infrastructure",
@@ -310,9 +353,7 @@
         <h4 class="text-xl font-semibold mb-5 text-white">Project Gallery</h4>
         <div class="photo-grid">
           ${p.photos.map((src, index) => `
-            <img src="${src}"
-                 onclick="openLightbox('${src}')"
-                 alt="${p.title} photo ${index + 1}">
+            <img src="${src}" onclick="openLightbox('${src}')" alt="${p.title} photo ${index + 1}">
           `).join('')}
         </div>
       `;
@@ -335,11 +376,97 @@
       document.getElementById('lightbox').style.display = 'none';
     }
 
+    // ==================== EXPERIENCE LADDER ====================
+    const experienceData = [
+      {
+        position: "Senior Computer Engineer",
+        company: "TechNova Solutions",
+        dates: "Jan 2025 – Present",
+        location: "Quezon City, Philippines",
+        desc: "Leading infrastructure projects and mentoring junior engineers.",
+        achievements: [
+          "Designed and deployed enterprise-grade network for 500+ users",
+          "Reduced system downtime by 40% through automation",
+          "Implemented cybersecurity protocols across multiple sites"
+        ]
+      },
+      {
+        position: "Embedded Systems Engineer",
+        company: "InnoHardware Inc.",
+        dates: "Jun 2023 – Dec 2024",
+        location: "Makati, Philippines",
+        desc: "Developed IoT and automation solutions using microcontrollers.",
+        achievements: [
+          "Built real-time monitoring systems using ESP32",
+          "Integrated sensors with cloud platforms",
+          "Optimized power consumption in battery-powered devices"
+        ]
+      },
+      {
+        position: "Junior Network Engineer",
+        company: "LinkNet Philippines",
+        dates: "Mar 2022 – May 2023",
+        location: "Manila, Philippines",
+        desc: "Assisted in LAN/WAN design and maintenance.",
+        achievements: [
+          "Configured Cisco routers and switches",
+          "Conducted network troubleshooting and performance audits",
+          "Supported 200+ client installations"
+        ]
+      }
+    ];
+
+    function renderExperience() {
+      const container = document.getElementById('experience-container');
+      let html = '';
+
+      experienceData.forEach((exp, index) => {
+        const isEven = index % 2 === 0;
+        const sideClass = isEven ? 'md:ml-auto md:pl-12' : 'md:mr-auto md:pr-12';
+        const dotPosition = isEven ? 'left-1/2 -translate-x-1/2 md:left-0' : 'left-1/2 -translate-x-1/2 md:right-0';
+
+        html += `
+          <div class="relative experience-card group">
+            <div class="rung w-24 mx-auto mb-8"></div>
+            <div class="flex flex-col md:flex-row gap-8 items-start ${sideClass}">
+              <div class="flex-shrink-0 bg-zinc-900 border border-blue-500/30 text-blue-400 px-6 py-3 rounded-2xl text-sm font-medium whitespace-nowrap shadow-inner">
+                ${exp.dates}
+              </div>
+              <div class="flex-1 bg-zinc-900/80 border border-white/10 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-3 h-3 rounded-full bg-blue-500"></div>
+                  <h3 class="text-2xl font-semibold">${exp.position}</h3>
+                </div>
+                <p class="text-blue-400 font-medium">${exp.company} • ${exp.location}</p>
+                <p class="text-gray-400 mt-4 leading-relaxed">${exp.desc}</p>
+                <ul class="mt-6 space-y-3 text-gray-300">
+                  ${exp.achievements.map(ach => `
+                    <li class="flex items-start gap-3">
+                      <span class="text-emerald-400 mt-1.5">→</span>
+                      <span>${ach}</span>
+                    </li>
+                  `).join('')}
+                </ul>
+              </div>
+            </div>
+            <div class="absolute top-12 ${dotPosition} w-6 h-6 bg-black border-4 border-blue-500 rounded-full shadow-lg hidden md:block"></div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
     // Close modals when clicking outside
     document.querySelectorAll('.modal').forEach(modal => {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) modal.style.display = 'none';
       });
+    });
+
+    // Initialize everything when page loads
+    window.addEventListener('load', () => {
+      renderExperience();
     });
   </script>
 </body>
