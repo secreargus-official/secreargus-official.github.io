@@ -8,9 +8,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-  
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap');
+
     body { font-family: 'Inter', system-ui, sans-serif; }
+
     .hero {
       height: 100vh;
       position: relative;
@@ -35,6 +36,61 @@
       line-height: 1;
       text-shadow: 0 4px 30px rgba(0,0,0,0.9);
     }
+
+    /* Experience Card with White Glow */
+    .experience-card {
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    .experience-card:hover {
+      transform: translateY(-12px);
+    }
+
+    .experience-card .inner-card {
+      background: linear-gradient(145deg, #1f1f1f, #111111);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 32px;
+      transition: all 0.6s ease;
+      box-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.12),
+        0 0 40px rgba(255, 255, 255, 0.06),
+        0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .experience-card:hover .inner-card {
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.25),
+        0 0 60px rgba(255, 255, 255, 0.15),
+        0 25px 70px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Title Animation - Clean slide-up (no underline) */
+    .experience-card h3 {
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      display: inline-block;
+      animation: titleReveal 0.9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    @keyframes titleReveal {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Staggered animation */
+    #experience-container .experience-card:nth-child(1) h3 { animation-delay: 0.2s; }
+    #experience-container .experience-card:nth-child(2) h3 { animation-delay: 0.7s; }
+    #experience-container .experience-card:nth-child(3) h3 { animation-delay: 1.2s; }
+
+    /* Rest of your styles (unchanged) */
     .project-card {
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       cursor: pointer;
@@ -67,9 +123,6 @@
       position: relative;
       padding: 40px;
       scrollbar-width: none;
-    }
-    .modal-content::-webkit-scrollbar {
-      display: none;
     }
     .photo-grid {
       display: grid;
@@ -107,23 +160,14 @@
       border-radius: 12px;
       box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.8);
     }
-
-    /* Ladder Experience Styles */
     .ladder-line {
       position: absolute;
       left: 50%;
       top: 0;
       bottom: 0;
       width: 4px;
-      background: linear-gradient(to bottom, transparent, #3b82f6, #60a5fa, transparent);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
-    }
-    .experience-card {
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .experience-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 30px 50px -15px rgb(0 0 0 / 0.6);
+      background: linear-gradient(to bottom, transparent, #ffffff, #d1d5db, transparent);
+      box-shadow: 0 0 15px rgba(255,255,255,0.4);
     }
     .rung {
       height: 3px;
@@ -133,7 +177,6 @@
   </style>
 </head>
 <body class="bg-black text-white">
-
   <!-- Navigation Bar -->
   <nav class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-8 py-5 flex justify-between items-center">
@@ -168,54 +211,10 @@
     </div>
   </section>
 
-  <!-- Viber Modal -->
-  <div id="viber-modal" class="modal">
-    <div class="modal-content" style="max-width: 420px;">
-      <button onclick="closeViberModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
-      <div class="mb-6"><i class="fab fa-viber text-[#7C3AED] text-6xl"></i></div>
-      <h3 class="text-2xl font-semibold mb-2">Connect on Viber</h3>
-      <p class="text-gray-400 mb-8">Scan the QR code or click the number to chat with me</p>
-      <div id="qrcode" class="mx-auto mb-6 bg-white p-4 rounded-xl inline-block"></div>
-      <a id="viber-number" href="#" class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8"></a>
-      <p class="text-xs text-gray-500">Open Viber on your phone and scan the code</p>
-    </div>
-  </div>
-
-  <!-- CV Modal -->
-  <div id="cv-modal" class="modal">
-    <div class="modal-content" style="max-width: 420px;">
-      <button onclick="closeCVModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
-      <div class="mb-8"><i class="fas fa-file-pdf text-6xl text-red-500"></i></div>
-      <h2 class="text-3xl font-semibold mb-4">CV</h2>
-      <p class="text-gray-400 mb-8 text-lg">Download Michaela M. Amador's latest CV (PDF).</p>
-      <div class="flex gap-4 justify-center">
-        <button onclick="downloadCV()" class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">DOWNLOAD CV</button>
-        <button onclick="closeCVModal()" class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">CANCEL</button>
-      </div>
-      <p class="text-xs text-gray-500 mt-8">The file "Amador_CV_2026.pdf" will be downloaded.</p>
-    </div>
-  </div>
-
-  <!-- Project Modal -->
-  <div id="project-modal" class="modal">
-    <div class="modal-content">
-      <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-4xl text-gray-400 hover:text-white hover:rotate-90 transition-all duration-300">×</button>
-      <div id="project-modal-content" class="space-y-10"></div>
-    </div>
-  </div>
-
-  <!-- Lightbox -->
-  <div id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-image" src="" alt="Enlarged photo">
-    <button onclick="event.stopImmediatePropagation(); closeLightbox()" 
-            class="absolute top-6 right-6 text-5xl text-white hover:text-gray-300 transition">×</button>
-  </div>
-
   <!-- Projects Section -->
   <section id="projects" class="min-h-screen bg-black py-24">
     <div class="max-w-6xl mx-auto px-8">
       <h2 class="text-6xl font-bold text-center mb-20 text-white">Selected Projects</h2>
-    
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(1)">
           <div class="overflow-hidden"><img src="images/Networking.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
@@ -226,30 +225,22 @@
           <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Embedded Systems</h3><p class="text-gray-400">Microcontroller-based automation.</p></div>
         </div>
         <div class="project-card bg-zinc-950 rounded-3xl overflow-hidden" onclick="showProjectModal(3)">
-          <div class="overflow-hidden">
-            <img src="images/Electronics2.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/>
-          </div>
-          <div class="p-8">
-            <h3 class="font-semibold text-2xl mb-2">Electronics Design</h3>
-            <p class="text-gray-400">Circuit design and hardware integration.</p>
-          </div>
+          <div class="overflow-hidden"><img src="images/Electronics2.jpg" class="w-full h-auto object-cover hover:scale-105 transition duration-700"/></div>
+          <div class="p-8"><h3 class="font-semibold text-2xl mb-2">Electronics Design</h3><p class="text-gray-400">Circuit design and hardware integration.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Work Experience Ladder Section -->
+  <!-- Experience Section -->
   <section id="experience" class="min-h-screen bg-zinc-950 py-24 relative">
     <div class="max-w-5xl mx-auto px-8">
       <div class="text-center mb-16">
         <h2 class="text-6xl font-bold text-white mb-4">My Career Ladder</h2>
         <p class="text-gray-400 text-xl max-w-md mx-auto">Progressing through roles, building expertise one step at a time.</p>
       </div>
-
       <div class="relative max-w-3xl mx-auto">
-        <!-- Central Ladder Line -->
         <div class="ladder-line hidden md:block"></div>
-
         <div id="experience-container" class="space-y-20 relative">
           <!-- Populated by JavaScript -->
         </div>
@@ -291,11 +282,9 @@
       numberLink.textContent = myViberNumber;
       numberLink.href = viberDeepLink;
     }
-
     function closeViberModal() {
       document.getElementById('viber-modal').style.display = 'none';
     }
-
     document.getElementById('viber-btn').addEventListener('click', (e) => {
       e.preventDefault();
       openViberModal();
@@ -304,11 +293,9 @@
     function showCVModal() {
       document.getElementById('cv-modal').style.display = 'flex';
     }
-
     function closeCVModal() {
       document.getElementById('cv-modal').style.display = 'none';
     }
-
     function downloadCV() {
       const filename = "Amador_CV_2026.pdf";
       const link = document.createElement('a');
@@ -320,23 +307,10 @@
       setTimeout(closeCVModal, 800);
     }
 
-    // Project Data
     const projectData = {
-      1: {
-        title: "Network Infrastructure",
-        mainDesc: "Designed and implemented a scalable and secure Local Area Network for a multi-floor office building.",
-        photos: ["images/network-1.jpg", "images/network-2.jpg", "images/network-3.jpg"]
-      },
-      2: {
-        title: "Embedded Systems",
-        mainDesc: "Developed microcontroller-based automation solutions using ESP32 and Arduino platforms.",
-        photos: ["images/Microcontrollers.jpg", "images/embedded-2.jpg", "images/embedded-3.jpg"]
-      },
-      3: {
-        title: "Electronics Design",
-        mainDesc: "Full-cycle analog & digital circuit design, PCB layout, and hardware prototyping.",
-        photos: ["images/Electronics.jpg", "images/electronics-2.jpg", "images/electronics-3.jpg"]
-      }
+      1: { title: "Network Infrastructure", mainDesc: "Designed and implemented a scalable and secure Local Area Network for a multi-floor office building.", photos: ["images/network-1.jpg", "images/network-2.jpg", "images/network-3.jpg"] },
+      2: { title: "Embedded Systems", mainDesc: "Developed microcontroller-based automation solutions using ESP32 and Arduino platforms.", photos: ["images/Microcontrollers.jpg", "images/embedded-2.jpg", "images/embedded-3.jpg"] },
+      3: { title: "Electronics Design", mainDesc: "Full-cycle analog & digital circuit design, PCB layout, and hardware prototyping.", photos: ["images/Electronics.jpg", "images/electronics-2.jpg", "images/electronics-3.jpg"] }
     };
 
     function showProjectModal(id) {
@@ -352,31 +326,22 @@
         <p class="text-gray-300 text-lg leading-relaxed mb-10">${p.mainDesc}</p>
         <h4 class="text-xl font-semibold mb-5 text-white">Project Gallery</h4>
         <div class="photo-grid">
-          ${p.photos.map((src, index) => `
-            <img src="${src}" onclick="openLightbox('${src}')" alt="${p.title} photo ${index + 1}">
-          `).join('')}
+          ${p.photos.map((src, index) => `<img src="${src}" onclick="openLightbox('${src}')" alt="${p.title} photo ${index + 1}">`).join('')}
         </div>
       `;
       contentDiv.innerHTML = html;
       modal.style.display = 'flex';
     }
-
-    function closeProjectModal() {
-      document.getElementById('project-modal').style.display = 'none';
-    }
-
+    function closeProjectModal() { document.getElementById('project-modal').style.display = 'none'; }
     function openLightbox(src) {
       const lightbox = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-image');
       lightboxImg.src = src;
       lightbox.style.display = 'flex';
     }
+    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
 
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-
-    // ==================== EXPERIENCE LADDER ====================
+    // Experience Data
     const experienceData = [
       {
         position: "SYSTEM ENGINEER - PART TIME",
@@ -384,11 +349,7 @@
         dates: "FEB 2026 – PRESENT",
         location: "Makati City, Philippines",
         desc: "Assisting projects",
-        achievements: [
-          "Enterprise network systems",
-          "IoT / smart device ecosystems",
-          "Industrial automation & control systems"
-        ]
+        achievements: ["Enterprise network systems", "IoT / smart device ecosystems", "Industrial automation & control systems"]
       },
       {
         position: "ENGINEERING TECHNICIAN - INTERN",
@@ -396,11 +357,7 @@
         dates: "FEB 2026 – APRIL 2026",
         location: "Makati, Philippines",
         desc: "Assisting technical problems.",
-        achievements: [
-          "IP Configurations (CCTV)",
-          "Sound Systems",
-          "Drafting using AutoCAD"
-        ]
+        achievements: ["IP Configurations (CCTV)", "Sound Systems", "Drafting using AutoCAD"]
       },
       {
         position: "ELECTRONICS TECHNICIAN",
@@ -408,18 +365,13 @@
         dates: "NOV 2024 – FEB 2025",
         location: "Mandaluyong, Philippines",
         desc: "Fixing electronics.",
-        achievements: [
-          "Fixing Laptops Hardware & Software",
-          "Fixing BIOS & OS",
-          "Basic fixing on Phones, etc."
-        ]
+        achievements: ["Fixing Laptops Hardware & Software", "Fixing BIOS & OS", "Basic fixing on Phones, etc."]
       }
     ];
 
     function renderExperience() {
       const container = document.getElementById('experience-container');
       let html = '';
-
       experienceData.forEach((exp, index) => {
         const isEven = index % 2 === 0;
         const sideClass = isEven ? 'md:ml-auto md:pl-12' : 'md:ml-auto md:pl-12';
@@ -429,45 +381,86 @@
           <div class="relative experience-card group">
             <div class="rung w-24 mx-auto mb-8"></div>
             <div class="flex flex-col md:flex-row gap-8 items-start ${sideClass}">
-              <div class="flex-shrink-0 bg-zinc-900 border border-white-500/30 text-white-400 px-6 py-3 rounded-2xl text-sm font-medium whitespace-nowrap shadow-inner">
+              <div class="flex-shrink-0 bg-zinc-900 border border-white/30 text-white/70 px-6 py-3 rounded-2xl text-sm font-medium whitespace-nowrap shadow-inner">
                 ${exp.dates}
               </div>
-              <div class="flex-1 bg-zinc-900/80 border border-white/10 rounded-3xl p-8 hover:border-white-500/50 transition-all">
+              <div class="flex-1 inner-card">
                 <div class="flex items-center gap-3 mb-4">
-                  <div class="w-3 h-3 rounded-full bg-white-500"></div>
-                  <h3 class="text-3xl font-semibold">${exp.position}</h3>
+                  <div class="w-3 h-3 rounded-full bg-white"></div>
+                  <h3 class="text-3xl font-semibold text-white">${exp.position}</h3>
                 </div>
-                <p class="text-white-400 font-semibold">${exp.company} • ${exp.location}</p>
+                <p class="text-white/80 font-semibold">${exp.company} • ${exp.location}</p>
                 <p class="text-gray-400 mt-4 leading-relaxed">${exp.desc}</p>
-                <ul class="mt-6 space-y-3 text-blue-300">
+                <ul class="mt-6 space-y-3 text-white/80">
                   ${exp.achievements.map(ach => `
                     <li class="flex items-start gap-3">
-                      <span class="text-emerald-400 mt-0.2">→</span>
+                      <span class="text-emerald-400 mt-0.5">→</span>
                       <span>${ach}</span>
                     </li>
                   `).join('')}
                 </ul>
               </div>
             </div>
-            <div class="absolute top-12 ${dotPosition} w-6 h-6 bg-black border-4 border-white-500 rounded-full shadow-lg hidden md:block"></div>
+            <div class="absolute top-12 ${dotPosition} w-6 h-6 bg-black border-4 border-white rounded-full shadow-lg hidden md:block"></div>
           </div>
         `;
       });
-
       container.innerHTML = html;
     }
 
-    // Close modals when clicking outside
+    // Modal outside click
     document.querySelectorAll('.modal').forEach(modal => {
       modal.addEventListener('click', function(e) {
         if (e.target === modal) modal.style.display = 'none';
       });
     });
 
-    // Initialize everything when page loads
+    // Initialize
     window.addEventListener('load', () => {
       renderExperience();
     });
   </script>
+
+  <!-- Viber Modal -->
+  <div id="viber-modal" class="modal">
+    <div class="modal-content" style="max-width: 420px;">
+      <button onclick="closeViberModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
+      <div class="mb-6"><i class="fab fa-viber text-[#7C3AED] text-6xl"></i></div>
+      <h3 class="text-2xl font-semibold mb-2">Connect on Viber</h3>
+      <p class="text-gray-400 mb-8">Scan the QR code or click the number to chat with me</p>
+      <div id="qrcode" class="mx-auto mb-6 bg-white p-4 rounded-xl inline-block"></div>
+      <a id="viber-number" href="#" class="block text-xl font-medium text-violet-400 hover:text-violet-300 transition mb-8"></a>
+      <p class="text-xs text-gray-500">Open Viber on your phone and scan the code</p>
+    </div>
+  </div>
+
+  <!-- CV Modal -->
+  <div id="cv-modal" class="modal">
+    <div class="modal-content" style="max-width: 420px;">
+      <button onclick="closeCVModal()" class="absolute top-4 right-4 text-3xl text-gray-400 hover:text-white">×</button>
+      <div class="mb-8"><i class="fas fa-file-pdf text-6xl text-red-500"></i></div>
+      <h2 class="text-3xl font-semibold mb-4">CV</h2>
+      <p class="text-gray-400 mb-8 text-lg">Download Michaela M. Amador's latest CV (PDF).</p>
+      <div class="flex gap-4 justify-center">
+        <button onclick="downloadCV()" class="bg-white text-black px-8 py-4 rounded-xl font-semibold hover:bg-gray-200 transition flex-1">DOWNLOAD CV</button>
+        <button onclick="closeCVModal()" class="bg-transparent border border-gray-500 text-gray-300 px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition flex-1">CANCEL</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-8">The file "Amador_CV_2026.pdf" will be downloaded.</p>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div id="project-modal" class="modal">
+    <div class="modal-content">
+      <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-4xl text-gray-400 hover:text-white hover:rotate-90 transition-all duration-300">×</button>
+      <div id="project-modal-content" class="space-y-10"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-image" src="" alt="Enlarged photo">
+    <button onclick="event.stopImmediatePropagation(); closeLightbox()" class="absolute top-6 right-6 text-5xl text-white hover:text-gray-300 transition">×</button>
+  </div>
 </body>
 </html>
